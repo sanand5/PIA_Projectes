@@ -11,7 +11,7 @@ Target: De moment nem ha deixar-ho en True o False per a ssaber si es o no una b
 Despres de tindre el dataset entrenarem la ia, de moment nem a centrarmos en el dataset.
 
 Nem a intentar fer webscraping de amazon , phonearea i si no de mercado libre
-
+Hem decidir gastar la api de rapidapi per a poder fer web scraping de amazon
 ### Tecnologies
 Python
 BBDD : MongoDB
