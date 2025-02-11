@@ -1,0 +1,18 @@
+# Extensiones
+*.csv
+*.json
+*.xml
+*.vscode
+
+# Mis entornos de python
+venv_*/
+
+# Configuraciones
+desktop.ini
+.directory
+
+# Archivos especificos
+
+
+# Directorios especificos
+Other/keys
