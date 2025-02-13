@@ -1,5 +1,10 @@
 import flet as ft
 
+
+#-- CAMBIOS A REALIZAR --#
+# 1. Arreglar opcion de campos vacios
+# 2. Añadir opciones
+
 def main(page: ft.Page):
     page.title = "ANÁLISIS DE OFERTAS MÓVILES"
     page.bgcolor = ft.colors.BLUE_50
@@ -19,20 +24,30 @@ def main(page: ft.Page):
             controls=[]
         )
     )
+    def actualizar_precio(e):
+        precio_label.value = f"Precio: {int(slider_precio.value)} €"
+        page.update()
 
+    precio_label = ft.Text("Precio (0-3000 €)", color=ft.colors.BLACK)
+
+    slider_precio = ft.Slider(
+        min=0,
+        max=3000,
+        divisions=30,  
+        value=1500,
+        on_change=actualizar_precio
+    )
 
     image = ft.Image(src="PIA/PROJECTE/mobile_icon.png", width=200, height=200, )
 
-    title = ft.Text("ANÁLISIS DE OFERTAS MÓVILES\n", size=32, weight=ft.FontWeight.BOLD, color=ft.colors.BLUE)
+    title = ft.Text("ANÁLISIS DE OFERTAS MÓVILES", size=32, weight=ft.FontWeight.BOLD, color=ft.colors.BLUE)
     title_row = ft.Column([
         image,
         title
     ], alignment=ft.MainAxisAlignment.CENTER, horizontal_alignment=ft.CrossAxisAlignment.CENTER)
     subtitle = ft.Text("Ingrese su oferta en dispositivos móviles y le calcularemos lo buena que es:\n", size=20, italic=True, color=ft.colors.BLUE_900)
-
+    fecha = ft.TextField(width=250,bgcolor=ft.colors.WHITE, label="Fecha de salida", border_color=ft.colors.BLACK, label_style=ft.TextStyle(color=ft.colors.BLACK), text_style=ft.TextStyle(color=ft.colors.BLACK))
     marca = ft.TextField(width=250,bgcolor=ft.colors.WHITE, label="Marca", border_color=ft.colors.BLACK, label_style=ft.TextStyle(color=ft.colors.BLACK), text_style=ft.TextStyle(color=ft.colors.BLACK))
-    precio = ft.TextField(width=250, bgcolor=ft.colors.WHITE, label="Precio (€)", keyboard_type=ft.KeyboardType.NUMBER, border_color=ft.colors.BLACK, label_style=ft.TextStyle(color=ft.colors.BLACK), text_style=ft.TextStyle(color=ft.colors.BLACK))
-
     memoria = ft.Dropdown(width=250, label="Número de Memoria", options=[
         ft.dropdown.Option("2 GB"),
         ft.dropdown.Option("4 GB"),
@@ -52,11 +67,27 @@ def main(page: ft.Page):
         ft.dropdown.Option("512 GB"),
         ft.dropdown.Option("1 TB"),
     ], border_color=ft.colors.BLACK, label_style=ft.TextStyle(color=ft.colors.BLACK), text_style=ft.TextStyle(color=ft.colors.BLACK), bgcolor=ft.colors.WHITE)
+    bateria = ft.Dropdown(width=250, label="Bateria", options=[
+        ft.dropdown.Option("2000 MaH"),
+        ft.dropdown.Option("3000 MaH"),
+        ft.dropdown.Option("3500 MaH"),
+        ft.dropdown.Option("4000 MaH"),
+        ft.dropdown.Option("5000 MaH"),
+        ft.dropdown.Option("6000 MaH"),
+        ft.dropdown.Option("7000 MaH"),
+    ], border_color=ft.colors.BLACK, label_style=ft.TextStyle(color=ft.colors.BLACK), text_style=ft.TextStyle(color=ft.colors.BLACK), bgcolor=ft.colors.WHITE)
 
     resultado = ft.Text(color=ft.colors.BLACK)
+    campos_vacios = any(not campo.value for campo in [fecha, marca, memoria, almacenamiento, bateria, slider_precio])
 
     def calcular_oferta(e):
-        if oferta: 
+        page.update()
+        if campos_vacios:
+            resultado.value = "Faltan campos por rellenar"
+            resultado.color = ft.colors.GREY
+            resultado.weight = ft.FontWeight.BOLD
+
+        elif oferta: 
             resultado.value = "La oferta introducida es una buena oferta!"
             resultado.color = ft.colors.GREEN
             resultado.weight = ft.FontWeight.BOLD
@@ -78,8 +109,10 @@ def main(page: ft.Page):
 
     fondo.content.controls.extend([
         title_row, subtitle, 
-        ft.Row([marca, precio], alignment=ft.MainAxisAlignment.CENTER),
-        ft.Row([memoria, almacenamiento], alignment=ft.MainAxisAlignment.CENTER),
+        ft.Row([precio_label],alignment=ft.MainAxisAlignment.CENTER),
+        ft.Row([slider_precio],alignment=ft.MainAxisAlignment.CENTER),
+        ft.Row([marca, fecha], alignment=ft.MainAxisAlignment.CENTER),
+        ft.Row([memoria, almacenamiento, bateria], alignment=ft.MainAxisAlignment.CENTER),
         boton, resultado, autores
     ])
 
