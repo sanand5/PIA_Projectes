@@ -12,6 +12,15 @@ Despres de tindre el dataset entrenarem la ia, de moment nem a centrarmos en el 
 
 Nem a intentar fer webscraping de amazon , phonearea i si no de mercado libre
 Hem decidir gastar la api de rapidapi per a poder fer web scraping de amazon
+
+
+## Coses a fer:
+- Web scrapping
+- Pujar dataset a mongo
+- Crear un model per a entrenar
+- Crear una api
+- Crear el frontend pogent fer peticio a la api
+
 ### Tecnologies
 Python
 BBDD : MongoDB
