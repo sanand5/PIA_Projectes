@@ -12,7 +12,7 @@ Despres de tindre el dataset entrenarem la ia, de moment nem a centrarmos en el 
 
 Nem a intentar fer webscraping de amazon , phonearea i si no de mercado libre
 Hem decidir gastar la api de rapidapi per a poder fer web scraping de amazon
-### 🔧 Tecnologies
+### 🔧 TECNOLOGIES
 Python
 BBDD : MongoDB
 Interficie: Flet
