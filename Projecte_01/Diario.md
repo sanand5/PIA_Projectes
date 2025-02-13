@@ -26,3 +26,7 @@ Python
 BBDD : MongoDB
 Interficie: Flet
 Llibreries IA: (sckitlearn / keras)
+
+## 12/02/2025
+Gerard: Començar la interficie amb flet
+Andreu: 
