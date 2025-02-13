@@ -18,6 +18,14 @@ BBDD : MongoDB
 Interficie: Flet
 Llibreries IA: (sckitlearn / keras)
 
+## Coses a fer:
+- Web scrapping
+- Pujar dataset a mongo
+- Crear un model per a entrenar
+- Crear una api
+- Crear el frontend pogent fer peticio a la api
+
+
 ## 🕒 12/02/2025
 Gerard: Començar la interficie amb flet
 Andreu: 
