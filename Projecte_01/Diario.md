@@ -39,7 +39,7 @@ Llibreries IA: (sckitlearn / keras)
 
 ## 🕒 12/02/2025
 Gerard: Començar la interficie amb flet
-Andreu: 
+Andreu: Obtencio de els productes
 
 ## COLUMNAS CSV
 - product_id,
