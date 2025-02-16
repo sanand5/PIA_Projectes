@@ -40,3 +40,28 @@ Llibreries IA: (sckitlearn / keras)
 ## 🕒 12/02/2025
 Gerard: Començar la interficie amb flet
 Andreu: 
+
+## COLUMNAS CSV
+- product_id,
+- precio_actual
+- precio_anterior
+- Tipo de pantalla
+- Tipo de procesador
+- Ano del modelo
+- Memoria RAM
+- Tecnologia de pantalla
+- Sistema operativo
+- Capacidad de la memoria flash instalada
+- Fabricante
+- Resolucion máxima
+- Numero de procesadores
+- Velocidad del procesador
+- Frecuencia de actualización
+- Marca
+- Capacidad de almacenamiento digital
+- Capacidad de la memoria
+- Capacidad de la memoria RAM instalada
+- Tecnologia GSM
+- Dimensiones del producto
+- Relacion de aspecto
+-Tamano de la pantalla
