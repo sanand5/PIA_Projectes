@@ -42,7 +42,7 @@ Gerard: Començar la interficie amb flet
 Andreu: Obtencio de els productes
 
 ## COLUMNAS CSV
-- product_id,
+- product_id
 - precio_actual
 - precio_anterior
 - Tipo de pantalla
@@ -65,3 +65,18 @@ Andreu: Obtencio de els productes
 - Dimensiones del producto
 - Relacion de aspecto
 -Tamano de la pantalla
+
+## POSIBLES MODELOS IA
+# SKLEARN
+- LinearRegression
+- DecisionTreeRegressor
+- RandomForestRegressor
+- GradientBoostingRegressor
+- 
+# SKLEARN
+- LinearRegression
+- DecisionTreeRegressor
+- RandomForestRegressor 🏆
+- GradientBoostingRegressor 🏆
+- Regresión con Support Vector Machines (SVR)
+
