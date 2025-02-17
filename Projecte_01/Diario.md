@@ -36,6 +36,19 @@ Llibreries IA: (sckitlearn / keras)
 - Crear una api
 - Crear el frontend pogent fer peticio a la api
 
+## 🚀 GUIA DE FICHEROS
+
+- Scrapping (sacamos ID, convertimos los ID en json)
+- Limpieza (limpiamos JSON, lo convertimos a CSV)
+- Preprocesamiento y entrenamiento (preparamos los datos, entrenamos el modelo y lo guardamos)
+- Interfaz del usuario (el usuario introduce un movil, cargamos el modelo y hacemos la prediccion)
+- Res: ids.json - mobile_raw.json - mobile_clean.json - mobile.csv
+
+PD: Subir a mongo:
+                - JSON Raw
+                - JSON Clean
+                - CSV
+
 
 ## 🕒 12/02/2025
 Gerard: Començar la interficie amb flet
