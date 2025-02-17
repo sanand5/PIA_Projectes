@@ -93,3 +93,10 @@ Andreu: Obtencio de els productes
 - GradientBoostingRegressor 🏆
 - Regresión con Support Vector Machines (SVR)
 
+  ## TO DO ACTUAL
+  - Descargar productos del json de 700 ids
+  - Dejar Dataset sin nulos
+  - Cambiar preu de str a float en 2 decimals
+  - Subir todo a mongo
+  - Preparar datos para probar IA
+
