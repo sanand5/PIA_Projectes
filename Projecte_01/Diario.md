@@ -88,6 +88,10 @@ Andreu: Obtencio de els productes
 - GradientBoostingRegressor 🏆
 - Regresión con Support Vector Machines (SVR)
 
+## RESULTADOS ESPERADOS
+R2 Score Proximo a 1 (0,80 ja es bo)
+MAE Lo mas bajo posible
+MSE Lo mas bajo posible
 ## MILLOR MODEL ACTUAL
 RANDOM FOREST AMB MODA EN MARCA (MAE de 85)
 # TO DO ACTUAL
