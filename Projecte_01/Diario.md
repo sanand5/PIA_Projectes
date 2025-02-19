@@ -94,9 +94,9 @@ Andreu: Obtencio de els productes
 - Regresión con Support Vector Machines (SVR)
 
   # TO DO ACTUAL
-  - Descargar productos del json de 700 ids
-  - Dejar Dataset sin nulos
-  - Cambiar preu de str a float en 2 decimals
-  - Subir todo a mongo
+  - Arreglar el Dataset
   - Preparar datos para probar IA
+  - Docker compose para mongoDB
+  - Exportar modelo con todos los posibles datos (epochs, transformer)
+  - Mirar como predecir un modelo despues de entenar
 
