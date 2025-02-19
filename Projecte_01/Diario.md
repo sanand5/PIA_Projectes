@@ -80,25 +80,22 @@ Andreu: Obtencio de els productes
 -Tamano de la pantalla
 
 ## POSIBLES MODELOS IA
-# SKLEARN
-- LinearRegression
-- DecisionTreeRegressor
-- RandomForestRegressor
-- GradientBoostingRegressor
-- 
-# SKLEARN
+
+### SKLEARN
 - LinearRegression
 - DecisionTreeRegressor
 - RandomForestRegressor 🏆
 - GradientBoostingRegressor 🏆
 - Regresión con Support Vector Machines (SVR)
 
-  # TO DO ACTUAL
-  - Arreglar el Dataset
-  - Preparar datos para probar IA
-  - Mirar como augmentar el dataset (Mezclar valores)??
-  - Docker compose para mongoDB
-  - Exportar modelo con todos los posibles datos (epochs, transformer)
-  - Mirar como predecir un modelo despues de entenar
-  - 
+## MILLOR MODEL ACTUAL
+RANDOM FOREST AMB MODA EN MARCA (MAE de 85)
+# TO DO ACTUAL
+- Arreglar el Dataset
+- Preparar datos para probar IA
+- Mirar como augmentar el dataset (Mezclar valores)??
+- Docker compose para mongoDB
+- Exportar modelo con todos los posibles datos (epochs, transformer)
+- Mirar como predecir un modelo despues de entenar
+ 
 
