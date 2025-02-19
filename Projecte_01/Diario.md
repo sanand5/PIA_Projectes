@@ -89,11 +89,14 @@ Andreu: Obtencio de els productes
 - Regresión con Support Vector Machines (SVR)
 
 ## RESULTADOS ESPERADOS
-R2 Score Proximo a 1 (0,80 ja es bo)
-MAE Lo mas bajo posible
-MSE Lo mas bajo posible
+- R2 Score Proximo a 1 (0,80 ja es bo)
+- MAE Lo mas bajo posible
+- MSE Lo mas bajo posible
 ## MILLOR MODEL ACTUAL
-RANDOM FOREST AMB MODA EN MARCA (MAE de 85)
+RANDOM FOREST AMB MODA EN MARCA 
+- R2 de 0,23
+- MAE de 85
+- MSE de 23343
 # TO DO ACTUAL
 - Arreglar el Dataset
 - Preparar datos para probar IA
