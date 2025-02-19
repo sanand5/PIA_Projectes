@@ -6,8 +6,6 @@
 venv_*/
 *_venv/
 
-# Base de datos
-./MongoDB/mongo_data/
 
 # Configuraciones
 desktop.ini
@@ -17,4 +15,6 @@ desktop.ini
 
 
 # Directorios especificos
-Other/keys
+
+## Base de datos
+Projecte_01/MongoDB/mongo_data
