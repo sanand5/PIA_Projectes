@@ -101,7 +101,6 @@ RANDOM FOREST AMB MODA EN MARCA
 - Arreglar el Dataset
 - Preparar datos para probar IA
 - Mirar como augmentar el dataset (Mezclar valores)??
-- Docker compose para mongoDB
 - Exportar modelo con todos los posibles datos (epochs, transformer)
 - Mirar como predecir un modelo despues de entenar
  
