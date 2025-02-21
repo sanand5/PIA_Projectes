@@ -103,5 +103,6 @@ RANDOM FOREST AMB MODA EN MARCA
 - Mirar como augmentar el dataset (Mezclar valores)??
 - Exportar modelo con todos los posibles datos (epochs, transformer)
 - Mirar como predecir un modelo despues de entenar
+- Exportar modelo con nombre + pàrametros importantes + fecha de hoy (Mos ajuda quan tenim varios modelos i volem vore resultats)
  
 
