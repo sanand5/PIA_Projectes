@@ -51,7 +51,7 @@ Luego se ha diseñado una interfaz interactiva con el usuario para poder indicar
 │-- config.json
 ```
 
-## Instalación
+## INSTALACIÓN
 
 1. Clonar el repositorio:
 ```sh
