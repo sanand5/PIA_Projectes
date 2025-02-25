@@ -5,7 +5,7 @@
 # Mis entornos de python
 venv_*/
 *_venv/
-
+projecte01_venv/
 
 # Configuraciones
 desktop.ini
