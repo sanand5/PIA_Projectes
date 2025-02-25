@@ -93,12 +93,14 @@ Ejecuta el siguiente cuaderno de jupyter para realizar entrenamiento del modelo 
 [Entrenamiento del Modelo](web_scraping/Comparar_ids.ipynb)  
 
 
-### 6. Interfaz y Servidor Flask
+### 6. Servidor Flask
 Levanta el servidor Flask para iniciar las peticiones de oferta:
 
 [Servidor Flask](web_scraping/Comparar_ids.ipynb)  
 
-Luego, ejecuta la interfaz para interactuar con el modelo:
+### 7. Interfaz
+
+Ejecuta la interfaz para interactuar con el modelo:
 
 [Interfaz](web_scraping/Comparar_ids.ipynb)  
 
