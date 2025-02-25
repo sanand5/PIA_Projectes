@@ -1,13 +1,13 @@
-# Proyecto de Análisis y Visualización de Datos
+# PROYECTO 1: OFERTAS MOBILES
 
-## Descripción
+## DESCRIPCIÓN
 Este proyecto implementa un modelo de inteligencia artificial el cual, vía una interfaz de usuario, indica la calidad sobre una oferta de un dispositivo mobil. 
 
 Se ha utilizado web scrapping mediante una API para obtener una gran cantidad de datos mobiles, luego se ha realizado una limpieza de los mismos para poder entrenar un modelo.
 
 Luego se ha diseñado una interfaz interactiva con el usuario para poder indicar tanto los componentes del mobil como el precio, el modelo realizara una prediccion de su precio, luego esta se compara con el precio real.
 
-## Estructura del Proyecto
+## ESTRUCTURA DEL PROYECTO
 ```
 📂 proyecto_01
 │-- 📂 web_scraping
@@ -103,17 +103,17 @@ Luego, ejecuta la interfaz para interactuar con el modelo:
 [Interfaz](web_scraping/Comparar_ids.ipynb)  
 
 
-## Archivos Adicionales
+## ARCHIVOS ADICIONALES
 - **others/**: Contiene otros archivos auxiliares.
 - **res/**: Carpeta de recursos, imágenes, modelos entrenados, etc.
 - **config.json**: Configuración del proyecto.
 
-## Contribución
+## CONTRIBUCIÓN
 Si deseas contribuir, por favor sigue estos pasos:
 1. Realiza un fork del repositorio.
 2. Crea una nueva rama.
 3. Realiza tus cambios y haz un commit.
 4. Envía un pull request.
 
-## Licencia
+## LICENCIA
 Este proyecto es completamente de codigo abierto.
