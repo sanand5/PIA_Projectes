@@ -98,11 +98,13 @@ RANDOM FOREST AMB MODA EN MARCA
 - MAE de 85
 - MSE de 23343
 # TO DO ACTUAL
-- Arreglar el Dataset
-- Preparar datos para probar IA
-- Mirar como augmentar el dataset (Mezclar valores)??
-- Exportar modelo con todos los posibles datos (epochs, transformer)
-- Mirar como predecir un modelo despues de entenar
-- Exportar modelo con nombre + pàrametros importantes + fecha de hoy (Mos ajuda quan tenim varios modelos i volem vore resultats)
+- Eliminar columnes que no interesen 
+- Llevar GPT en Clean dataframe
+- Jo crec que el jupiter de visualitcacio el podriem cambiar de puedo a limpieza o algun altre puesto i vore que podem fer us de ahí
  
+
+## TODO si ni ha temps
+- Mirar como augmentar el dataset (Mezclar valores)??
+- Ajustar Modelo
+- Outliders
 

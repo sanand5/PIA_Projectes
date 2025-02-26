@@ -3,8 +3,8 @@
 *.vscode
 
 # Mis entornos de python
-venv_*/
-*_venv/
+Projecte_01/venv_*/
+Projecte_01/*_venv/
 
 
 # Configuraciones
