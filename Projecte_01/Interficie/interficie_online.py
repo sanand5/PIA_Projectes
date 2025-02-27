@@ -3,11 +3,20 @@ import pandas as pd
 import requests
 from funciones import prediccion
 
+# FUNCIONES
 def sacar_promedio(num_estrellas, num_valoraciones):
     return num_valoraciones / num_estrellas if num_estrellas != 0 else 0
 
+def textfield(label, value):
+    return ft.TextField(width=220, label=label, value=value, border_color=ft.colors.BLACK,label_style=ft.TextStyle(color=ft.colors.BLACK), text_style=ft.TextStyle(color=ft.colors.BLACK))
+
+def checkbox(label):
+    return ft.Checkbox(label=label, label_style=ft.TextStyle(color=ft.colors.BLACK))
+
+# MAIN
 def main(page: ft.Page):
     
+    # Parametros
     page.title = "ANÁLISIS DE OFERTAS MÓVILES"
     page.bgcolor = ft.colors.BLUE_50
     page.scroll = "auto"
@@ -15,19 +24,11 @@ def main(page: ft.Page):
     page.window_width = 800
     page.window_height = 1000
 
-    def textfield(label, value):
-        return ft.TextField(width=220, label=label, value=value, border_color=ft.colors.BLACK,label_style=ft.TextStyle(color=ft.colors.BLACK), text_style=ft.TextStyle(color=ft.colors.BLACK))
-
+    # Campos
     precio = textfield("Precio (€)", "300")
     precio_anterior = textfield("Precio anterior (€)", "350")
-    
-    image = ft.Image(src="/home/aluvesprada/Escritorio/VISUAL_STUDIO/PIA/PROJECTE/5.Interfaz/mobile_icon.png", width=150, height=150)
-    title = ft.Text(
-        "COMPARE MOBILE",
-        size=50,  # Aumenta el tamaño
-        weight=ft.FontWeight.W_900,  # Usa el peso máximo disponible
-        color=ft.colors.BLUE,
-    )
+    image = ft.Image(src="../res/mobile_icon.png", width=150, height=150)
+    title = ft.Text("COMPARE MOBILE",size=50,  weight=ft.FontWeight.W_900, color=ft.colors.BLUE)
     subtitle = ft.Text("Ingrese su oferta en dispositivos móviles y le calcularemos lo buena que es:",weight=ft.FontWeight.W_900, size=16, italic=True, color=ft.colors.BLUE_900)
     fecha = textfield("Año de salida", "2023")
     marca = textfield("Marca", "samsung")
@@ -44,36 +45,32 @@ def main(page: ft.Page):
     numero_valoraciones = textfield("Número de valoraciones", "1500")
     numero_estrellas = textfield("Número de estrellas", "4")
     texto_opinion= ft.Text("Te parece una buena oferta?",color=ft.Colors.BLACK)
-
-    def checkbox(label):
-        return ft.Checkbox(label=label, label_style=ft.TextStyle(color=ft.colors.BLACK))
-
-    # Crear los checkboxes
     checkbox_si = checkbox("Si")
     checkbox_no = checkbox("No")
-
+    resultado = ft.Text(color=ft.colors.BLACK)
+    autores = ft.Text("\n\nHecho por: Andreu Sanz y Gerard Grau", size=14, italic=True, color=ft.colors.BLUE)
+    campos = [
+            precio, precio_anterior, fecha, marca, pantalla_in, pantalla_tipo, 
+            grosor, peso, velocidad_gpu, ancho_px, alto_px, memoria, almacenamiento, 
+            bateria, numero_valoraciones, numero_estrellas
+        ]
+    
+    # Funciones internas
     def on_checkbox_change(e):
-        # Si el checkbox 'Si' se marca, desmarcamos 'No'
+
         if checkbox_si.value:
             checkbox_no.value = False
-        # Si el checkbox 'No' se marca, desmarcamos 'Si'
+
         elif checkbox_no.value:
             checkbox_si.value = False
-        # Si ambos checkboxes están desmarcados, los dejamos como están
+
         elif not checkbox_si.value and not checkbox_no.value:
             checkbox_si.value = False
             checkbox_no.value = False
-            
-        # Actualizamos la página para reflejar los cambios en los checkboxes
         page.update()
 
-    # Asignar la función de cambio a ambos checkboxes
     checkbox_si.on_change = on_checkbox_change
     checkbox_no.on_change = on_checkbox_change
-
-    resultado = ft.Text(color=ft.colors.BLACK)
-
-
     def calcular_oferta(e):
         try:
             promedio_valoraciones = sacar_promedio(int(numero_estrellas.value), int(numero_valoraciones.value))
@@ -170,23 +167,20 @@ def main(page: ft.Page):
             resultado.color = ft.colors.RED
 
         page.update()
-        
+    boton = ft.ElevatedButton("Calcular oferta", on_click=calcular_oferta, bgcolor=ft.colors.GREY, color=ft.colors.WHITE,height=50, width=300, disabled=True)
+
     def validar_campos():
-        campos = [
-            precio, precio_anterior, fecha, marca, pantalla_in, pantalla_tipo, 
-            grosor, peso, velocidad_gpu, ancho_px, alto_px, memoria, almacenamiento, 
-            bateria, numero_valoraciones, numero_estrellas
-        ]
+
         
         for campo in campos:
             page.update()
             if not campo.value.strip():
-                boton.bgcolor = ft.colors.GREY  
+                boton.bgcolor = ft.colors.GREY #Deshabilitar boton  
                 boton.disabled = True
                 page.update()
                 return
         
-        boton.bgcolor = ft.colors.BLUE  
+        boton.bgcolor = ft.colors.BLUE  #Habilitar boton
         boton.disabled = False
         page.update()
 
@@ -199,10 +193,9 @@ def main(page: ft.Page):
         [image, title],
         alignment=ft.MainAxisAlignment.CENTER,
         horizontal_alignment=ft.CrossAxisAlignment.CENTER,
-        spacing=10  # Espacio entre los elementos
+        spacing=10 
     )
-    boton = ft.ElevatedButton("Calcular oferta", on_click=calcular_oferta, bgcolor=ft.colors.GREY, color=ft.colors.WHITE,height=50, width=300, disabled=True)
-    autores = ft.Text("\n\nHecho por: Andreu Sanz y Gerard Grau", size=14, italic=True, color=ft.colors.BLUE)
+    # Contenido
     fondo = ft.Container(
         expand=True,
         content=ft.Column([
@@ -248,4 +241,5 @@ def main(page: ft.Page):
 
     page.add(fondo)
 
+#Ejecutar Main
 ft.app(target=main)
