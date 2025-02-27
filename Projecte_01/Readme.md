@@ -78,9 +78,11 @@ $ pip install -r requirements.txt
 ## USO DEL REPOSITORIO
 
 ### 1. Web Scraping
-Ejecuta los siguientes cuadernos de jupyter de web scraping para obtener los datos:  
+Ejecuta el siguiente cuaderno de jupyter de web scraping para obtener los datos y subirlos a una base de datos MongoDB:  
 
 [Comparar Ids](web_scraping/Comparar_ids.ipynb)  
+
+Ejecuta los siguientes cuadernos de jupyter de web scraping para obtener los datos:  
 [Get Products](web_scraping/Comparar_ids.ipynb)
 
 
