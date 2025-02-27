@@ -13,13 +13,16 @@ Luego se ha diseñado una interfaz interactiva con el usuario para poder indicar
 │-- 📂 web_scraping
 │   │-- Comparar_ids.ipynb
 │   │-- Get_products.ipynb
+|
 │-- 📂 data_cleaning
 │   │-- CleanDaraframe.ipynb
 │   │-- Outliders.ipynb
+|
 │-- 📂 visualizacion
 │   │-- Visualizacion.ipynb
-│   │-- dataset_stats.md
+|
 │-- 📂 model_training
+|   |
 │   │-- 📂 models
 |   |   |-- encoder_ohe.joblib
 |   |   |-- model_gb_data.zip
@@ -30,10 +33,14 @@ Luego se ha diseñado una interfaz interactiva con el usuario para poder indicar
 |   |   |-- y_test.csv
 |   |   |-- y_train.csv
 │   │-- TrainModel.ipynb
+|
 │-- 📂 interfaz
 │   │-- interficie_online.py
 │   │-- mobile_icon.png
+|
 │-- 📂 flask_server
+│   │-- main.py
+|   |
 │   │-- 📂 model
 |   |   |-- encoder_ohe.joblib
 |   |   |-- model_gb_data.zip
@@ -43,10 +50,11 @@ Luego se ha diseñado una interfaz interactiva con el usuario para poder indicar
 |   |   |-- X_train.csv
 |   |   |-- y_test.csv
 |   |   |-- y_train.csv
-│   │-- main.py
+|
 │-- 📂 Other
 │   │-- graficos.pdf
 │   │-- data_stats.md
+|
 │-- 📂 res
 │-- README.md
 │-- requirements.txt
@@ -88,6 +96,8 @@ Ejecuta el siguiente cuaderno de jupyter para obtener distintos graficos sobre l
 
 [Visualizacion](web_scraping/Comparar_ids.ipynb)  
 
+>[!NOTE]
+>Los contenidos generados en la visualización se encuentran en la carpeta Others
 
 ### 4. Entrenamiento del Modelo
 Ejecuta el siguiente cuaderno de jupyter para realizar entrenamiento del modelo y posteriormente guardarlo:  
