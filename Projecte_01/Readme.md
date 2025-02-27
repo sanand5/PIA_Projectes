@@ -3,7 +3,7 @@
 ## DESCRIPCIÓN
 Este proyecto implementa un modelo de inteligencia artificial el cual, vía una interfaz de usuario, indica la calidad sobre una oferta de un dispositivo mobil. 
 
-Se ha utilizado web scrapping mediante una API para obtener una gran cantidad de datos mobiles, luego se ha realizado una limpieza de los mismos para poder entrenar un modelo.
+Se ha utilizado web scrapping mediante una API (Scrapper API)  para obtener una gran cantidad de datos mobiles, luego se ha realizado una limpieza de los mismos para poder entrenar un modelo.
 
 Luego se ha diseñado una interfaz interactiva con el usuario para poder indicar tanto los componentes del mobil como el precio, el modelo realizara una prediccion de su precio, luego esta se compara con el precio real.
 
