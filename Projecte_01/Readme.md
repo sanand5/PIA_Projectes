@@ -45,6 +45,8 @@ Luego se ha diseñado una interfaz interactiva con el usuario para poder indicar
 |   |   |-- y_train.csv
 │   │-- main.py
 │-- 📂 Other
+│   │-- graficos.pdf
+│   │-- data_stats.md
 │-- 📂 res
 │-- README.md
 │-- requirements.txt
