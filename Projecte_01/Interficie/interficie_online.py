@@ -22,11 +22,13 @@ def main(page: ft.Page):
     precio_anterior = textfield("Precio anterior (€)", "350")
     
     image = ft.Image(src="/home/aluvesprada/Escritorio/VISUAL_STUDIO/PIA/PROJECTE/5.Interfaz/mobile_icon.png", width=150, height=150)
-    title = ft.Text("ANÁLISIS DE OFERTAS MÓVILES", size=24, weight=ft.FontWeight.BOLD, color=ft.colors.BLUE)
-    subtitle = ft.Text("Ingrese su oferta en dispositivos móviles y le calcularemos lo buena que es:", size=16, italic=True, color=ft.colors.BLUE_900)
-    
-    title_row = ft.Column([image, title], alignment=ft.MainAxisAlignment.CENTER, horizontal_alignment=ft.CrossAxisAlignment.CENTER)
-    
+    title = ft.Text(
+        "COMPARE MOBILE",
+        size=50,  # Aumenta el tamaño
+        weight=ft.FontWeight.W_900,  # Usa el peso máximo disponible
+        color=ft.colors.BLUE,
+    )
+    subtitle = ft.Text("Ingrese su oferta en dispositivos móviles y le calcularemos lo buena que es:",weight=ft.FontWeight.W_900, size=16, italic=True, color=ft.colors.BLUE_900)
     fecha = textfield("Año de salida", "2023")
     marca = textfield("Marca", "samsung")
     pantalla_in = textfield("Tamaño de pantalla (pulgadas)", "6.5")
@@ -37,13 +39,41 @@ def main(page: ft.Page):
     ancho_px = textfield("Ancho (px)", "1080")
     alto_px = textfield("Alto (px)", "2400")
     memoria = textfield("Número de Memoria","8GB")
-    almacenamiento = textfield("Almacenamiento","128GB")
-    bateria = textfield("Batería","5000 MaH")
+    almacenamiento = textfield("Almacenamiento ","128GB")
+    bateria = textfield("Batería (MaH)","5000 MaH")
     numero_valoraciones = textfield("Número de valoraciones", "1500")
     numero_estrellas = textfield("Número de estrellas", "4")
+    texto_opinion= ft.Text("Te parece una buena oferta?",color=ft.Colors.BLACK)
+
+    def checkbox(label):
+        return ft.Checkbox(label=label, label_style=ft.TextStyle(color=ft.colors.BLACK))
+
+    # Crear los checkboxes
+    checkbox_si = checkbox("Si")
+    checkbox_no = checkbox("No")
+
+    def on_checkbox_change(e):
+        # Si el checkbox 'Si' se marca, desmarcamos 'No'
+        if checkbox_si.value:
+            checkbox_no.value = False
+        # Si el checkbox 'No' se marca, desmarcamos 'Si'
+        elif checkbox_no.value:
+            checkbox_si.value = False
+        # Si ambos checkboxes están desmarcados, los dejamos como están
+        elif not checkbox_si.value and not checkbox_no.value:
+            checkbox_si.value = False
+            checkbox_no.value = False
+            
+        # Actualizamos la página para reflejar los cambios en los checkboxes
+        page.update()
+
+    # Asignar la función de cambio a ambos checkboxes
+    checkbox_si.on_change = on_checkbox_change
+    checkbox_no.on_change = on_checkbox_change
 
     resultado = ft.Text(color=ft.colors.BLACK)
-    
+
+
     def calcular_oferta(e):
         try:
             promedio_valoraciones = sacar_promedio(int(numero_estrellas.value), int(numero_valoraciones.value))
@@ -82,9 +112,9 @@ def main(page: ft.Page):
         datos_movil = {
                     "ano":fecha_int,
                     "almacenamiento": almacenamiento_int,
-                    "marca": marca.value,
+                    "marca": marca.value.lower(),
                     "pantalla_in": pantalla_in_float, 
-                    "pantalla_tipo": pantalla_tipo.value, 
+                    "pantalla_tipo": pantalla_tipo.value.lower(), 
                     "velocidad_cpu_ghz": velocidad_gpu_float,
                     "ram": memoria_int, 
                     "grosor": grosor_float, 
@@ -94,7 +124,7 @@ def main(page: ft.Page):
                     "bateria": bateria_int,  
                     "promedio_valoraciones": promedio_valoraciones, 
                     "precio_anterior": precio_anterior_val,
-                    "precio_actual": 0,
+                    "precio_actual": 0, 
                 }
 
         try:
@@ -106,23 +136,33 @@ def main(page: ft.Page):
             response = requests.post("http://127.0.0.1:8081/model_v1", json=datos_movil)
             response_data = response.json()
             precio_prediccion = response_data.get("precio_modelo")
-
-                        # Define el porcentaje máximo que se considera aceptable
-            porcentaje_maximo = 10  # Puedes cambiar este valor para ajustar el umbral
-
-            if precio_oferta < precio_prediccion:
+            
+            rangos_descuento = [
+                (100, 300, 15),   # Para móviles entre 100 y 300€, se considera buena oferta con un 15% de descuento
+                (301, 700, 12),   # Para móviles entre 301 y 700€, se considera buena oferta con un 12% de descuento
+                (701, 1200, 10),  # Para móviles entre 701 y 1200€, se considera buena oferta con un 10% de descuento
+                (1201, 2000, 8)   # Para móviles entre 1201 y 2000€, se considera buena oferta con un 8% de descuento
+            ]
+            
+            porcentaje_maximo = 10  
+            for rango in rangos_descuento:
+                if rango[0] <= precio_prediccion <= rango[1]:
+                    porcentaje_maximo = rango[2]
+                    break
+                    
+            precio_limite_buena = precio_prediccion * (1 - porcentaje_maximo / 100)
+            precio_limite_aceptable = precio_prediccion * (1 + porcentaje_maximo / 100)
+            
+            if precio_oferta <= precio_limite_buena:
                 resultado.value = "Es una buena oferta"
                 resultado.color = ft.colors.GREEN
-                page.update()
-            elif precio_oferta >= precio_prediccion and precio_oferta <= precio_prediccion * (1 + porcentaje_maximo / 100):
+            elif precio_limite_buena < precio_oferta <= precio_limite_aceptable:
                 resultado.value = "Es una oferta aceptable"
-                resultado.color = ft.colors.YELLOW  # Puedes cambiar el color si prefieres otro
-                page.update()
-
+                resultado.color = ft.colors.ORANGE  
             else:
                 resultado.value = "No es una buena oferta"
                 resultado.color = ft.colors.RED
-                page.update()
+            page.update()   
 
         except Exception as ex:
             resultado.value = f"Error en la predicción: {ex}"
@@ -130,7 +170,7 @@ def main(page: ft.Page):
             resultado.color = ft.colors.RED
 
         page.update()
-    
+        
     def validar_campos():
         campos = [
             precio, precio_anterior, fecha, marca, pantalla_in, pantalla_tipo, 
@@ -138,42 +178,74 @@ def main(page: ft.Page):
             bateria, numero_valoraciones, numero_estrellas
         ]
         
-        # Comprobar si algún campo está vacío
         for campo in campos:
+            page.update()
             if not campo.value.strip():
-                boton.bgcolor = ft.colors.GREY  # Desactivar el botón (gris)
+                boton.bgcolor = ft.colors.GREY  
                 boton.disabled = True
                 page.update()
                 return
         
-        # Si todos los campos están completos
-        boton.bgcolor = ft.colors.BLUE  # Activar el botón
+        boton.bgcolor = ft.colors.BLUE  
         boton.disabled = False
         page.update()
 
-    # Se ejecuta cada vez que se actualiza algún campo
     for campo in [precio, precio_anterior, fecha, marca, pantalla_in, pantalla_tipo, 
                 grosor, peso, velocidad_gpu, ancho_px, alto_px, memoria, almacenamiento, 
                 bateria, numero_valoraciones, numero_estrellas]:
         campo.on_change = lambda e: validar_campos()
 
-    boton = ft.ElevatedButton("Calcular oferta", on_click=calcular_oferta, bgcolor=ft.colors.GREY, color=ft.colors.WHITE, width=220, disabled=True)
-    autores = ft.Text("\n\nHecho por: Andreu Sanz y Gerard Grau", size=14, italic=True, color=ft.colors.BLUE)
-    
-    fondo = ft.Container(
-        expand=True, width=800, height=1000,
-        gradient=ft.LinearGradient(begin=ft.alignment.top_center, end=ft.alignment.bottom_center, colors=[ft.colors.BLUE_100, ft.colors.WHITE]),
-        content=ft.Column([
-            title_row, subtitle,
-            ft.Row([precio, precio_anterior], alignment=ft.MainAxisAlignment.CENTER),
-            ft.Row([marca, fecha, pantalla_in], alignment=ft.MainAxisAlignment.CENTER),
-            ft.Row([memoria, almacenamiento, bateria], alignment=ft.MainAxisAlignment.CENTER),
-            ft.Row([grosor, peso, velocidad_gpu], alignment=ft.MainAxisAlignment.CENTER),
-            ft.Row([ancho_px, alto_px, pantalla_tipo], alignment=ft.MainAxisAlignment.CENTER),
-            boton, resultado, autores
-        ], alignment=ft.MainAxisAlignment.CENTER, horizontal_alignment=ft.CrossAxisAlignment.CENTER)
+    title_row = ft.Column(
+        [image, title],
+        alignment=ft.MainAxisAlignment.CENTER,
+        horizontal_alignment=ft.CrossAxisAlignment.CENTER,
+        spacing=10  # Espacio entre los elementos
     )
-    
+    boton = ft.ElevatedButton("Calcular oferta", on_click=calcular_oferta, bgcolor=ft.colors.GREY, color=ft.colors.WHITE,height=50, width=300, disabled=True)
+    autores = ft.Text("\n\nHecho por: Andreu Sanz y Gerard Grau", size=14, italic=True, color=ft.colors.BLUE)
+    fondo = ft.Container(
+        expand=True,
+        content=ft.Column([
+                title_row, 
+                subtitle,
+                ft.Container(
+                    content=ft.Row([precio, precio_anterior], alignment=ft.MainAxisAlignment.CENTER),
+                    padding=ft.Padding(top=60, bottom=10,left=0,right=0)
+                ),
+                ft.Container(
+                    content=ft.Row([marca, fecha, pantalla_in], alignment=ft.MainAxisAlignment.CENTER),
+                    padding=ft.Padding(top=10, bottom=10,left=0,right=0)
+                ),
+                ft.Container(
+                    content=ft.Row([memoria, almacenamiento, bateria], alignment=ft.MainAxisAlignment.CENTER),
+                    padding=ft.Padding(top=10, bottom=10,left=0,right=0)
+                ),
+                ft.Container(
+                    content=ft.Row([grosor, peso, velocidad_gpu], alignment=ft.MainAxisAlignment.CENTER),
+                    padding=ft.Padding(top=10, bottom=10,left=0,right=0)
+                ),
+                ft.Container(
+                    content=ft.Row([ancho_px, alto_px, pantalla_tipo], alignment=ft.MainAxisAlignment.CENTER),
+                    padding=ft.Padding(top=10, bottom=10,left=0,right=0)
+                ),
+                texto_opinion,
+                ft.Container(
+                    content=ft.Row([checkbox_si, checkbox_no], alignment=ft.MainAxisAlignment.CENTER),
+                    padding=ft.Padding(top=10, bottom=10,left=0,right=0)
+                ),
+                boton, 
+                resultado,
+                ft.Container(
+                    content=ft.Row([autores], alignment=ft.MainAxisAlignment.CENTER),
+                    expand=True,
+                    padding=ft.Padding(top=10, bottom=10,left=0,right=0)
+                ),
+            ],
+            alignment=ft.MainAxisAlignment.CENTER, 
+            horizontal_alignment=ft.CrossAxisAlignment.CENTER
+        )
+    )
+
     page.add(fondo)
 
 ft.app(target=main)
