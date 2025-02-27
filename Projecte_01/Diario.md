@@ -108,3 +108,9 @@ RANDOM FOREST AMB MODA EN MARCA
 - Ajustar Modelo
 - Outliders
 
+
+
+semisupervisor
+
+Active Learning
+

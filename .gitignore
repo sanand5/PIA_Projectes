@@ -6,6 +6,9 @@
 Projecte_01/venv_*/
 Projecte_01/*_venv/
 
+Projecte_01/scrapping/__pycache__
+Projecte_01/scrapping/config.py
+
 
 # Configuraciones
 desktop.ini

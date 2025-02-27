@@ -1,4 +1,4 @@
-#!/home/andreuet/PIA_Projectes/Projecte_01/projecte01_venv/bin/python
+#!/home/andreuet/PIA_Projectes/Projecte_01/projecte01_venv/bin/python3
 # -*- coding: utf-8 -*-
 import re
 import sys
