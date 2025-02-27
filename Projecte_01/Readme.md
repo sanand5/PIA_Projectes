@@ -116,11 +116,15 @@ Ejecuta la interfaz para interactuar con el modelo:
 
 [Interfaz](web_scraping/Comparar_ids.ipynb)  
 
+>[!IMPORTANT]
+>Para la correcta ejecución de la interfaz, el servidor Flask debe estar en funcionamiento
+
 
 ## ARCHIVOS ADICIONALES
 - **others/**: Contiene otros archivos auxiliares.
 - **res/**: Carpeta de recursos, imágenes, modelos entrenados, etc.
 - **config.json**: Configuración del proyecto.
+- **requirments.txt**: Listado de las dependencias de Python necesarias.
 
 ## CONTRIBUCIÓN
 Si deseas contribuir, por favor sigue estos pasos:
