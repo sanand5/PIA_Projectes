@@ -12,8 +12,6 @@ Despres de tindre el dataset entrenarem la ia, de moment nem a centrarmos en el 
 
 Nem a intentar fer webscraping de amazon , phonearea i si no de mercado libre
 Hem decidir gastar la api de rapidapi per a poder fer web scraping de amazon
-<<<<<<< HEAD
-<<<<<<< HEAD
 
 
 ## Coses a fer:
@@ -97,17 +95,34 @@ RANDOM FOREST AMB MODA EN MARCA
 - R2 de 0,23
 - MAE de 85
 - MSE de 23343
+  
 # TO DO ACTUAL
-- Eliminar columnes que no interesen 
-- Llevar GPT en Clean dataframe
-- Jo crec que el jupiter de visualitcacio el podriem cambiar de puedo a limpieza o algun altre puesto i vore que podem fer us de ahí
- 
-
-## TODO si ni ha temps
-- Mirar como augmentar el dataset (Mezclar valores)??
-- Ajustar Modelo
-- Outliders
-
+- "./FlasckServer/app.py" Arreglar lo de quan envia alguna columna que no te el encode
+- "./training/TrainModel.ipynb" Explicar perque hem eliminat la marca que dona problemes
+- "./limpieza/Outliders.ipynb" Fer lo de crear un model de regresio per a detectar outliders
+- "./training/TrainModel.ipynb" Ajustar modelo
+- Detectar columnas que no interesen para eliminarlas de dataset
+- Reorganitzar Repositri
+- "./FlasckServer/app.py" Crear una api pa el link de amazon
+- "./limpieza/CleanDataframe.ipynb" Gestuionar datos especificos 
+        {'marca': array(['8849', '8849pro', 'akozon', 'alcatel', 'apple', 'artfone', 'asus',
+                'azuiqimeng', 'bewinner', 'blackview', 'ciciglow',
+                'cmf by nothing', 'cocomm', 'cubot', 'cuifati', 'cxpmy', 'dauz',
+                'doact', 'doogee', 'doro', 'dpofirs', 'el', 'elprico', 'energizer',
+                'fockety', 'fossibot', 'garsent', 'gegong', 'google', 'goshyda',
+                'hammer h', 'heepdd', 'hipipooo', 'honor', 'hotwav', 'huawei',
+                'hyrich', 'icreation', 'iniu', 'inmarsat', 'ivanky', 'jcb',
+                'jectse', 'joyzap', 'jtqtj', 'lazmin112', 'leyt', 'luqeeg',
+                'mcmgc', 'meizu', 'motorola', 'msmga', 'mtgud', 'nokia', 'nothing',
+                'nubia', 'oakcastle', 'oneplus', 'oppo', 'orico', 'oscal',
+                'oukitel', 'panasonic', 'poco', 'pthtechus', 'pusokei', 'qrzrq',
+                'qubo', 'realme', 'redmi', 'samsung', 'shieldon', 'sorandy',
+                'sparkledot', 'spc', 'suaat', 'sveon', 'tbest', 'tcl', 'tonysa',
+                'toptro', 'trevi', 'ttfone', 'ukuu', 'ulefone', 'umidigi',
+                'unihertz', 'vivo', 'volfen', 'winh', 'wrtogo', 'xgody', 'xiaomi',
+                'zokoe', 'zte', 'zunate'], dtype=object),
+        'pantalla_tipo': array(['1920 x 1080 pixels', 'amoled', 'dlp', 'fhd+', 'hd', 'hd+', 'ips',
+                'lcd', 'led', 'oled', 'superamoled', 'xdr'], dtype=object)}
 
 
 semisupervisor
