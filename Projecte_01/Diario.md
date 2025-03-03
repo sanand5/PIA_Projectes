@@ -97,13 +97,9 @@ RANDOM FOREST AMB MODA EN MARCA
 - MSE de 23343
   
 # TO DO ACTUAL
-- "./FlasckServer/app.py" Arreglar lo de quan envia alguna columna que no te el encode
-- "./training/TrainModel.ipynb" Explicar perque hem eliminat la marca que dona problemes
-- "./limpieza/Outliders.ipynb" Fer lo de crear un model de regresio per a detectar outliders
+- En el dataset me fica ca tots els que no ha trobat preuanterior mels fica com 199 (crec)
 - "./training/TrainModel.ipynb" Ajustar modelo
 - Detectar columnas que no interesen para eliminarlas de dataset
-- Reorganitzar Repositri
-- "./FlasckServer/app.py" Crear una api pa el link de amazon
 - "./limpieza/CleanDataframe.ipynb" Gestuionar datos especificos 
         {'marca': array(['8849', '8849pro', 'akozon', 'alcatel', 'apple', 'artfone', 'asus',
                 'azuiqimeng', 'bewinner', 'blackview', 'ciciglow',
@@ -123,6 +119,8 @@ RANDOM FOREST AMB MODA EN MARCA
                 'zokoe', 'zte', 'zunate'], dtype=object),
         'pantalla_tipo': array(['1920 x 1080 pixels', 'amoled', 'dlp', 'fhd+', 'hd', 'hd+', 'ips',
                 'lcd', 'led', 'oled', 'superamoled', 'xdr'], dtype=object)}
+- Reorganitzar Repositri
+- "./FlasckServer/app.py" Crear una api pa el link de amazon
 
 
 semisupervisor
