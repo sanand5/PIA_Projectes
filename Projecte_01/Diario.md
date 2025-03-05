@@ -98,8 +98,10 @@ RANDOM FOREST AMB MODA EN MARCA
   
 # TO DO ACTUAL
 
-- "./training/TrainModel.ipynb" Ajustar modelo
-- Detectar columnas que no interesen para eliminarlas de dataset
+- Cambiar carpetes a minuscula
+- Cambiar idioma
+- 
 
 - Reorganitzar Repositri
+- Detectar columnas que no interesen para eliminarlas de dataset
 - "./FlasckServer/app.py" Crear una api pa el link de amazon
