@@ -97,11 +97,6 @@ RANDOM FOREST AMB MODA EN MARCA
 - MSE de 23343
   
 # TO DO ACTUAL
-
-- Cambiar carpetes a minuscula
-- Cambiar idioma
-- 
-
 - Reorganitzar Repositri
 - Detectar columnas que no interesen para eliminarlas de dataset
 - "./FlasckServer/app.py" Crear una api pa el link de amazon
