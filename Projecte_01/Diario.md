@@ -97,33 +97,9 @@ RANDOM FOREST AMB MODA EN MARCA
 - MSE de 23343
   
 # TO DO ACTUAL
-- En el dataset me fica ca tots els que no ha trobat preuanterior mels fica com 199 (crec)
+
 - "./training/TrainModel.ipynb" Ajustar modelo
 - Detectar columnas que no interesen para eliminarlas de dataset
-- "./limpieza/CleanDataframe.ipynb" Gestuionar datos especificos 
-        {'marca': array(['8849', '8849pro', 'akozon', 'alcatel', 'apple', 'artfone', 'asus',
-                'azuiqimeng', 'bewinner', 'blackview', 'ciciglow',
-                'cmf by nothing', 'cocomm', 'cubot', 'cuifati', 'cxpmy', 'dauz',
-                'doact', 'doogee', 'doro', 'dpofirs', 'el', 'elprico', 'energizer',
-                'fockety', 'fossibot', 'garsent', 'gegong', 'google', 'goshyda',
-                'hammer h', 'heepdd', 'hipipooo', 'honor', 'hotwav', 'huawei',
-                'hyrich', 'icreation', 'iniu', 'inmarsat', 'ivanky', 'jcb',
-                'jectse', 'joyzap', 'jtqtj', 'lazmin112', 'leyt', 'luqeeg',
-                'mcmgc', 'meizu', 'motorola', 'msmga', 'mtgud', 'nokia', 'nothing',
-                'nubia', 'oakcastle', 'oneplus', 'oppo', 'orico', 'oscal',
-                'oukitel', 'panasonic', 'poco', 'pthtechus', 'pusokei', 'qrzrq',
-                'qubo', 'realme', 'redmi', 'samsung', 'shieldon', 'sorandy',
-                'sparkledot', 'spc', 'suaat', 'sveon', 'tbest', 'tcl', 'tonysa',
-                'toptro', 'trevi', 'ttfone', 'ukuu', 'ulefone', 'umidigi',
-                'unihertz', 'vivo', 'volfen', 'winh', 'wrtogo', 'xgody', 'xiaomi',
-                'zokoe', 'zte', 'zunate'], dtype=object),
-        'pantalla_tipo': array(['1920 x 1080 pixels', 'amoled', 'dlp', 'fhd+', 'hd', 'hd+', 'ips',
-                'lcd', 'led', 'oled', 'superamoled', 'xdr'], dtype=object)}
+
 - Reorganitzar Repositri
 - "./FlasckServer/app.py" Crear una api pa el link de amazon
-
-
-semisupervisor
-
-Active Learning
-
