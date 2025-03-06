@@ -1,139 +1,135 @@
-# PROYECTO 1: OFERTAS MOBILES
+# PROJECTE 1: OFERTA MOBILS
+- [PROJECTE 1: OFERTA MOBILS](#projecte-1-oferta-mobils)
+  - [DESCRIPCIÓ](#descripció)
+    - [Esquema de funcionament](#esquema-de-funcionament)
+    - [Previsualització](#previsualització)
+  - [ESTRUCTURA DEL PROJECTE](#estructura-del-projecte)
+  - [INSTALACIÓ](#instalació)
+  - [US DEL REPOSITORI](#us-del-repositori)
+    - [1. Web Scraping](#1-web-scraping)
+    - [2. Netetja de dades](#2-netetja-de-dades)
+    - [3. Visualización](#3-visualización)
+    - [4. Entrenament del model](#4-entrenament-del-model)
+    - [5. Servidor amb Flask](#5-servidor-amb-flask)
+    - [6. Interfície](#6-interfície)
+  - [ARXIUS ADDICIONALS](#arxius-addicionals)
+  - [CONTRIBUCIÓ](#contribució)
+  - [LLICÈNCIA](#llicència)
 
-## DESCRIPCIÓN
-Este proyecto implementa un modelo de inteligencia artificial el cual, vía una interfaz de usuario, indica la calidad sobre una oferta de un dispositivo mobil. 
+## DESCRIPCIÓ
+Aquest projecte implementa un model d'intel·ligència artificial que, mitjançant una interfície d'usuari, indica la qualitat d'una oferta d'un dispositiu mòbil.
 
-Se ha utilizado web scrapping mediante una API (Scrapper API)  para obtener una gran cantidad de datos mobiles, luego se ha realizado una limpieza de los mismos para poder entrenar un modelo.
+S'ha utilitzat web scraping mitjançant una API (Scraper API) per a obtindre una gran quantitat de dades de mòbils. A continuació, s'ha fet una neteja d'aquestes dades per a poder entrenar el model.  
 
-Luego se ha diseñado una interfaz interactiva con el usuario para poder indicar tanto los componentes del mobil como el precio, el modelo realizara una prediccion de su precio, luego esta se compara con el precio real.
+Després, s'ha dissenyat una interfície interactiva amb l'usuari perquè aquest puga introduir tant els components del mòbil com el seu preu. El model realitzarà una predicció del preu i, posteriorment, aquesta es compararà amb el preu real.
 
-## ESTRUCTURA DEL PROYECTO
+### Esquema de funcionament
+![Funcionament](<Other/Sin título-2025-02-13-1638.png>)
+
+### Previsualització
+![Interficie](<Other/>)
+
+## ESTRUCTURA DEL PROJECTE
 ```
-📂 proyecto_01
+📂 projecte_01 
 │-- 📂 web_scraping
-│   │-- Comparar_ids.ipynb
-│   │-- Get_products.ipynb
+│   │-- comparar_ids.ipynb
+│   │-- get_products.ipynb
+│   │-- config.py
 |
 │-- 📂 data_cleaning
-│   │-- CleanDaraframe.ipynb
-│   │-- Outliders.ipynb
+│   │-- clean_dataset.ipynb
+│   │-- outliders.ipynb
 |
-│-- 📂 visualizacion
-│   │-- Visualizacion.ipynb
+│-- 📂 visualitzacio
+│   │-- visualitzacio.ipynb
 |
 │-- 📂 model_training
 |   |
 │   │-- 📂 models
-|   |   |-- encoder_ohe.joblib
-|   |   |-- model_gb_data.zip
-|   |   |-- model.joblib
-|   |   |-- scaler.joblib
-|   |   |-- X_test.csv
-|   |   |-- X_train.csv
-|   |   |-- y_test.csv
-|   |   |-- y_train.csv
-│   │-- TrainModel.ipynb
+│   │-- train_model.ipynb
 |
-│-- 📂 interfaz
+│-- 📂 interficie
 │   │-- interficie_online.py
+│   │-- funciones.py
+│   │-- interficie.py
+│   │-- diccionario.txt
 │   │-- mobile_icon.png
 |
 │-- 📂 flask_server
-│   │-- main.py
+│   │-- app.py
+│   │-- config.py
+│   │-- database.py
+│   │-- model.py
 |   |
 │   │-- 📂 model
-|   |   |-- encoder_ohe.joblib
-|   |   |-- model_gb_data.zip
-|   |   |-- model.joblib
-|   |   |-- scaler.joblib
-|   |   |-- X_test.csv
-|   |   |-- X_train.csv
-|   |   |-- y_test.csv
-|   |   |-- y_train.csv
 |
 │-- 📂 Other
-│   │-- graficos.pdf
-│   │-- data_stats.md
 |
 │-- 📂 res
 │-- README.md
 │-- requirements.txt
-│-- config.json
 ```
 
-## INSTALACIÓN
+## INSTALACIÓ
 
-1. Clonar el repositorio:
+1. Clonar el repositori:
 ```sh
-$ git clone https://github.com/usuario/proyecto.git
-$ cd proyecto
+$ git clone https://github.com/usuari/PIA_Projectes.git
+$ cd PIA_Projectes
 ```
-2. Crear un entorno virtual e instalar dependencias:
+2. Crear un entorn virtual e instalar dependencies:
 ```sh
 $ python -m venv env
 $ source env/bin/activate  # Windows: env\Scripts\activate
 $ pip install -r requirements.txt
 ```
 
-## USO DEL REPOSITORIO
+## US DEL REPOSITORI
 
 ### 1. Web Scraping
-Ejecuta el siguiente cuaderno de jupyter de web scraping para obtener los datos y subirlos a una base de datos MongoDB:  
+**[web_scraping/comparar_ids.ipynb](web_scraping/comparar_ids.ipynb):** Aquest quadern té utilitats per als fitxers d'IDs.  
+**[web_scraping/get_products.ipynb](web_scraping/get_products.ipynb):** Per a realitzar el web scraping a Amazon amb Scraper API i pujar les dades a MongoDB.
 
-[Comparar Ids](web_scraping/Comparar_ids.ipynb)  
+### 2. Netegja de dades  
+**[data_cleaning/clean_dataset.ipynb](data_cleaning/clean_dataset.ipynb):** Netegja de les dades.  
+**[data_cleaning/outliders.ipynb](data_cleaning/outliders.ipynb):** Detecció de *outliers*.
 
-Ejecuta los siguientes cuadernos de jupyter de web scraping para obtener los datos:  
-[Get Products](web_scraping/Comparar_ids.ipynb)
+### 3. Visualització  
+**[visualitzacio/visualitzacio.ipynb](visualitzacio/visualitzacio.ipynb):** Obtenir diferents gràfics de les dades i generar una vista general del dataset.
 
+>[!NOTE]  
+>El contingut generat en aquest Jupyter es visualitza en la carpeta [Other](Other/).
 
-### 2. Limpieza de Datos
+### 4. Entrenament del model  
+**[model_training/train_model.ipynb](model_training/train_model.ipynb):** Entrenament del model i desada d'aquest.
 
-Ejecuta los siguientes cuadernos de jupyter de limpieza para obtener datos limpios:  
+### 5. Servidor amb Flask  
+**[flask_server/config.py](flask_server/config.py):** Configuració del servidor.  
+**[flask_server/database.py](flask_server/database.py):** Gestiona les connexions amb la base de dades.  
+**[flask_server/model.py](flask_server/model.py):** Gestiona la càrrega del model i les peticions.  
+**[flask_server/app.py](flask_server/app.py):** Gestiona l'API.
 
-[Clean Dataframe](web_scraping/Comparar_ids.ipynb)  
-[Outliders](web_scraping/Comparar_ids.ipynb)
+>[!IMPORTANT]  
+>El model ha d'estar carregat prèviament en [flask_server/model](flask_server/model).
+### 6. Interfície  
 
-### 3. Visualización
-Ejecuta el siguiente cuaderno de jupyter para obtener distintos graficos sobre los datos y para generar un .md con diferentes estadisticas:
+[Interfície](interficie/)  
 
-[Visualizacion](web_scraping/Comparar_ids.ipynb)  
+>[!IMPORTANT]  
+>Per al correcte funcionament de la interfície, el servidor Flask ha d'estar en execució.  
 
->[!NOTE]
->Los contenidos generados en la visualización se encuentran en la carpeta Others
+## ARXIUS ADDICIONALS  
+- **others/**: Conté altres arxius auxiliars.  
+- **res/**: Carpeta de recursos, imatges, models entrenats, etc.  
+- **requirements.txt**: Llistat de les dependències de Python necessàries.  
 
-### 4. Entrenamiento del Modelo
-Ejecuta el siguiente cuaderno de jupyter para realizar entrenamiento del modelo y posteriormente guardarlo:  
+## CONTRIBUCIÓ  
+Si vols contribuir, per favor segueix aquests passos:  
+1. Fes un fork del repositori.  
+2. Crea una nova branca.  
+3. Fes els teus canvis i realitza un commit.  
+4. Envia un pull request.  
 
-[Entrenamiento del Modelo](web_scraping/Comparar_ids.ipynb)  
-
-
-### 5. Servidor Flask
-Levanta el servidor Flask para iniciar las peticiones de oferta:
-
-[Servidor Flask](web_scraping/Comparar_ids.ipynb)  
-
-### 6. Interfaz
-
-Ejecuta la interfaz para interactuar con el modelo:
-
-[Interfaz](web_scraping/Comparar_ids.ipynb)  
-
->[!IMPORTANT]
->Para la correcta ejecución de la interfaz, el servidor Flask debe estar en funcionamiento
-
-
-## ARCHIVOS ADICIONALES
-- **others/**: Contiene otros archivos auxiliares.
-- **res/**: Carpeta de recursos, imágenes, modelos entrenados, etc.
-- **config.json**: Configuración del proyecto.
-- **requirments.txt**: Listado de las dependencias de Python necesarias.
-
-## CONTRIBUCIÓN
-Si deseas contribuir, por favor sigue estos pasos:
-1. Realiza un fork del repositorio.
-2. Crea una nueva rama.
-3. Realiza tus cambios y haz un commit.
-4. Envía un pull request.
-
-## LICENCIA
-Este proyecto es completamente de codigo abierto.
+## LLICÈNCIA  
+Aquest projecte és completament de codi obert.

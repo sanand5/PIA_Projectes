@@ -6,7 +6,6 @@ from config import Config
 
 app = Flask(__name__)
 
-# Cargar el modelo
 scaler, encoder, model, X_data_columns, modas = cargar_modelo()
 
 @app.route("/model_v1", methods=["POST"])
