@@ -27,7 +27,7 @@ Després, s'ha dissenyat una interfície interactiva amb l'usuari perquè aquest
 ![Funcionament](<Other/Diagrama.png>)
 
 ### Previsualització
-![Interficie](<Other/>)
+![Interficie](<Other/Interfaz.png>)
 
 ## ESTRUCTURA DEL PROJECTE
 ```
