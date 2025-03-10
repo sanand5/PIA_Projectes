@@ -91,6 +91,7 @@ RANDOM FOREST AMB MODA EN MARCA
 # TO DO ACTUAL
 - Mover mobile_icon de interficie a res (o a Other pero si ho fiques en Other cambia la Path del codigo) 
 - Eliminar todo de interficie menos interficie_online y renombrarla a interficie
+- FLASK
 - Reorganitzar Repositri
 - Detectar columnas que no interesen para eliminarlas de dataset
 - "./FlasckServer/app.py" Crear una api pa el link de amazon
