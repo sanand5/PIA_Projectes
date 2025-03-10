@@ -1,7 +1,6 @@
 import flet as ft
 import pandas as pd
 import requests
-from funciones import prediccion
 
 # FUNCIONES
 def sacar_promedio(num_estrellas, num_valoraciones):
@@ -25,25 +24,25 @@ def main(page: ft.Page):
     page.window_height = 1000
 
     # Campos
-    precio = textfield("Precio (€)", "300")
-    precio_anterior = textfield("Precio anterior (€)", "350")
+    precio = textfield("Precio (€)", "")
+    precio_anterior = textfield("Precio anterior (€)", "")
     image = ft.Image(src="../res/mobile_icon.png", width=150, height=150)
     title = ft.Text("COMPARE MOBILE",size=50,  weight=ft.FontWeight.W_900, color=ft.colors.BLUE)
     subtitle = ft.Text("Ingrese su oferta en dispositivos móviles y le calcularemos lo buena que es:",weight=ft.FontWeight.W_900, size=16, italic=True, color=ft.colors.BLUE_900)
-    fecha = textfield("Año de salida", "2023")
-    marca = textfield("Marca", "samsung")
-    pantalla_in = textfield("Tamaño de pantalla (pulgadas)", "6.5")
-    pantalla_tipo = textfield("Tipo de pantalla", "amoled")
-    grosor = textfield("Profundidad (cm)", "0.8")
-    peso = textfield("Peso (g)", "180")
-    velocidad_gpu = textfield("Velocidad de CPU (GHz)", "2.84")
-    ancho_px = textfield("Ancho (px)", "1080")
-    alto_px = textfield("Alto (px)", "2400")
-    memoria = textfield("Número de Memoria","8GB")
-    almacenamiento = textfield("Almacenamiento ","128GB")
-    bateria = textfield("Batería (MaH)","5000 MaH")
-    numero_valoraciones = textfield("Número de valoraciones", "1500")
-    numero_estrellas = textfield("Número de estrellas", "4")
+    fecha = textfield("Año de salida", "")
+    marca = textfield("Marca", "")
+    pantalla_in = textfield("Tamaño de pantalla (pulgadas)", "")
+    pantalla_tipo = textfield("Tipo de pantalla", "")
+    grosor = textfield("Profundidad (cm)", "")
+    peso = textfield("Peso (g)", "")
+    velocidad_gpu = textfield("Velocidad de CPU (GHz)", "")
+    ancho_px = textfield("Ancho (px)", "")
+    alto_px = textfield("Alto (px)", "")
+    memoria = textfield("Número de Memoria","")
+    almacenamiento = textfield("Almacenamiento ","")
+    bateria = textfield("Batería (MaH)","")
+    numero_valoraciones = textfield("Número de valoraciones", "")
+    numero_estrellas = textfield("Número de estrellas", "")
     texto_opinion= ft.Text("Te parece una buena oferta?",color=ft.Colors.BLACK)
     checkbox_si = checkbox("Si")
     checkbox_no = checkbox("No")
@@ -125,11 +124,6 @@ def main(page: ft.Page):
                 }
 
         try:
-            #---------- LOCAL------------------------#
-            df_movil = pd.DataFrame([datos_movil])
-            precio_prediccion = prediccion(df_movil)
-
-            #---------- SERVIDOR---------------------#
             response = requests.post("http://127.0.0.1:8081/model_v1", json=datos_movil)
             response_data = response.json()
             precio_prediccion = response_data.get("precio_modelo")
