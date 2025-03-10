@@ -61,20 +61,12 @@ Andreu: Obtencio de els productes
 - Ano del modelo
 - Memoria RAM
 - Tecnologia de pantalla
-- Sistema operativo
-- Capacidad de la memoria flash instalada
-- Fabricante
 - Resolucion máxima
-- Numero de procesadores
 - Velocidad del procesador
-- Frecuencia de actualización
 - Marca
 - Capacidad de almacenamiento digital
-- Capacidad de la memoria
 - Capacidad de la memoria RAM instalada
-- Tecnologia GSM
 - Dimensiones del producto
-- Relacion de aspecto
 -Tamano de la pantalla
 
 ## POSIBLES MODELOS IA
@@ -97,6 +89,8 @@ RANDOM FOREST AMB MODA EN MARCA
 - MSE de 23343
   
 # TO DO ACTUAL
+- Mover mobile_icon de interficie a res (o a Other pero si ho fiques en Other cambia la Path del codigo) 
+- Eliminar todo de interficie menos interficie_online y renombrarla a interficie
 - Reorganitzar Repositri
 - Detectar columnas que no interesen para eliminarlas de dataset
 - "./FlasckServer/app.py" Crear una api pa el link de amazon
