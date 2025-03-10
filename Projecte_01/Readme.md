@@ -24,7 +24,7 @@ S'ha utilitzat web scraping mitjançant una API (Scraper API) per a obtindre una
 Després, s'ha dissenyat una interfície interactiva amb l'usuari perquè aquest puga introduir tant els components del mòbil com el seu preu. El model realitzarà una predicció del preu i, posteriorment, aquesta es compararà amb el preu real.
 
 ### Esquema de funcionament
-![Funcionament](<Other/Sin título-2025-02-13-1638.png>)
+![Funcionament](<Other/Diagrama.png>)
 
 ### Previsualització
 ![Interficie](<Other/>)
