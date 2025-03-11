@@ -114,7 +114,7 @@ $ docker compose up -d
 >El model ha d'estar carregat prèviament en [flask_server/model](flask_server/model).
 ### 6. Interfície  
 
-**[Interfície](interficie/):**   
+**[Interfície](interficie/):** El usuari interactua amb una interfaç per a realitzar una petició al servidor amb les dades requerides, el servidor torna la predicció i es calcula lo bona que es la oferta.  
 >[!IMPORTANT]  
 >Per al correcte funcionament de la interfície, el servidor Flask ha d'estar en execució.  
 
