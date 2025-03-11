@@ -24,10 +24,10 @@ S'ha utilitzat web scraping mitjançant una API (Scraper API) per a obtindre una
 Després, s'ha dissenyat una interfície interactiva amb l'usuari perquè aquest puga introduir tant els components del mòbil com el seu preu. El model realitzarà una predicció del preu i, posteriorment, aquesta es compararà amb el preu real.
 
 ### Esquema de funcionament
-![Funcionament](<Other/Diagrama.png>)
+![Funcionament](<other/Diagrama.png>)
 
 ### Previsualització
-![Interficie](<Other/Interfaz.png>)
+![Interficie](<other/Interfaz.png>)
 
 ## ESTRUCTURA DEL PROJECTE
 ```
@@ -45,30 +45,25 @@ Després, s'ha dissenyat una interfície interactiva amb l'usuari perquè aquest
 │   │-- visualitzacio.ipynb
 |
 │-- 📂 model_training
-|   |
 │   │-- 📂 models
 │   │-- train_model.ipynb
 |
 │-- 📂 interficie
-│   │-- interficie_online.py
-│   │-- funciones.py
 │   │-- interficie.py
-│   │-- diccionario.txt
-│   │-- mobile_icon.png
 |
 │-- 📂 flask_server
 │   │-- app.py
 │   │-- config.py
 │   │-- database.py
 │   │-- model.py
-|   |
 │   │-- 📂 model
 |
-│-- 📂 Other
-|
+│-- 📂 backup
+│-- 📂 other
 │-- 📂 res
 │-- README.md
 │-- requirements.txt
+│-- docker-compose.yml
 ```
 
 ## INSTALACIÓ
@@ -83,6 +78,10 @@ $ cd PIA_Projectes
 $ python -m venv env
 $ source env/bin/activate  # Windows: env\Scripts\activate
 $ pip install -r requirements.txt
+```
+3. Crear un contenidor de Mongodb
+```sh
+$ docker compose up -d
 ```
 
 ## US DEL REPOSITORI
@@ -99,10 +98,11 @@ $ pip install -r requirements.txt
 **[visualitzacio/visualitzacio.ipynb](visualitzacio/visualitzacio.ipynb):** Obtenir diferents gràfics de les dades i generar una vista general del dataset.
 
 >[!NOTE]  
->El contingut generat en aquest Jupyter es visualitza en la carpeta [Other](Other/).
+>El contingut generat en aquest Jupyter es visualitza en la carpeta [other](other/).
 
 ### 4. Entrenament del model  
 **[model_training/train_model.ipynb](model_training/train_model.ipynb):** Entrenament del model i desada d'aquest.
+**[model_training/models](model_training/models):** models ja entrenats.
 
 ### 5. Servidor amb Flask  
 **[flask_server/config.py](flask_server/config.py):** Configuració del servidor.  
@@ -114,14 +114,14 @@ $ pip install -r requirements.txt
 >El model ha d'estar carregat prèviament en [flask_server/model](flask_server/model).
 ### 6. Interfície  
 
-[Interfície](interficie/)  
-
+**[Interfície](interficie/):**   
 >[!IMPORTANT]  
 >Per al correcte funcionament de la interfície, el servidor Flask ha d'estar en execució.  
 
 ## ARXIUS ADDICIONALS  
-- **others/**: Conté altres arxius auxiliars.  
-- **res/**: Carpeta de recursos, imatges, models entrenats, etc.  
+- **other/**: Conté altres arxius auxiliars.  
+- **res/**: Carpeta de recursos, imatges, datasets, etc.  
+- **backup/**: Es guarden les copies de seguretat necesaries  
 - **requirements.txt**: Llistat de les dependències de Python necessàries.  
 
 ## CONTRIBUCIÓ  
