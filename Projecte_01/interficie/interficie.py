@@ -56,20 +56,15 @@ def main(page: ft.Page):
     
     # Funciones internas
     def on_checkbox_change(e):
-
-        if checkbox_si.value:
-            checkbox_no.value = False
-
-        elif checkbox_no.value:
+        if e.control == checkbox_no and checkbox_no.value:
             checkbox_si.value = False
-
-        elif not checkbox_si.value and not checkbox_no.value:
-            checkbox_si.value = False
+        elif e.control == checkbox_si and checkbox_si.value:
             checkbox_no.value = False
         page.update()
 
     checkbox_si.on_change = on_checkbox_change
     checkbox_no.on_change = on_checkbox_change
+
     def calcular_oferta(e):
         try:
             promedio_valoraciones = sacar_promedio(int(numero_estrellas.value), int(numero_valoraciones.value))
@@ -100,6 +95,7 @@ def main(page: ft.Page):
             alto_px_float = float(alto_px.value)
             fecha_int = int(fecha.value)
             opinion = None
+
             if checkbox_si.value:
                 opinion = True
             if checkbox_no.value:
@@ -168,7 +164,19 @@ def main(page: ft.Page):
             resultado.color = ft.colors.RED
 
         page.update()
-    boton = ft.ElevatedButton("Calcular oferta", on_click=calcular_oferta, bgcolor=ft.colors.GREY, color=ft.colors.WHITE,height=50, width=300, disabled=False)
+    # boton = ft.ElevatedButton("Calcular oferta", on_click=calcular_oferta, color=ft.colors.WHITE,height=50, width=300, disabled_color=ft.colors.GREY, disabled=True)
+    boton = ft.ElevatedButton(
+        "Calcular oferta",
+        on_click=calcular_oferta,
+        color=ft.colors.WHITE,
+        bgcolor=ft.colors.BLUE,
+        height=50,
+        width=300,
+        style=ft.ButtonStyle(
+            color=ft.Colors.GREY,
+            bgcolor=ft.Colors.GREY_300
+        )
+    )
 
     def validar_campos():
 
