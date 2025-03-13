@@ -42,6 +42,6 @@ def enviar():
 
 if __name__ == "__main__":
     try:
-        app.run(host="127.0.0.1", port=8085, debug=True)
+        app.run(host="127.0.0.1", port=8085)
     except Exception as e:
         print(f"Error al iniciar la aplicación: {e}")

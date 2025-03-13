@@ -24,25 +24,25 @@ def main(page: ft.Page):
     page.window_height = 1000
 
     # Campos
-    precio = textfield("Precio (€)", "")
-    precio_anterior = textfield("Precio anterior (€)", "")
+    precio = textfield("Precio (€)", "100")
+    precio_anterior = textfield("Precio anterior (€)", "300")
     image = ft.Image(src="../res/mobile_icon.png", width=150, height=150)
     title = ft.Text("COMPARE MOBILE",size=50,  weight=ft.FontWeight.W_900, color=ft.colors.BLUE)
     subtitle = ft.Text("Ingrese su oferta en dispositivos móviles y le calcularemos lo buena que es:",weight=ft.FontWeight.W_900, size=16, italic=True, color=ft.colors.BLUE_900)
-    fecha = textfield("Año de salida", "")
-    marca = textfield("Marca", "")
-    pantalla_in = textfield("Tamaño de pantalla (pulgadas)", "")
-    pantalla_tipo = textfield("Tipo de pantalla", "")
-    grosor = textfield("Profundidad (cm)", "")
-    peso = textfield("Peso (g)", "")
-    velocidad_gpu = textfield("Velocidad de CPU (GHz)", "")
-    ancho_px = textfield("Ancho (px)", "")
-    alto_px = textfield("Alto (px)", "")
-    memoria = textfield("Número de Memoria","")
-    almacenamiento = textfield("Almacenamiento ","")
-    bateria = textfield("Batería (MaH)","")
-    numero_valoraciones = textfield("Número de valoraciones", "")
-    numero_estrellas = textfield("Número de estrellas", "")
+    fecha = textfield("Año de salida", "2013")
+    marca = textfield("Marca", "Samsung")
+    pantalla_in = textfield("Tamaño de pantalla (pulgadas)", "4.3")
+    pantalla_tipo = textfield("Tipo de pantalla", "lcd")
+    grosor = textfield("Profundidad (cm)", "1.27")
+    peso = textfield("Peso (g)", "77")
+    velocidad_gpu = textfield("Velocidad de CPU (GHz)", "1.7")
+    ancho_px = textfield("Ancho (px)", "540")
+    alto_px = textfield("Alto (px)", "960")
+    memoria = textfield("Número de Memoria","2")
+    almacenamiento = textfield("Almacenamiento ","256")
+    bateria = textfield("Batería (MaH)","5000")
+    numero_valoraciones = textfield("Número de valoraciones", "5000")
+    numero_estrellas = textfield("Número de estrellas", "5")
     texto_opinion= ft.Text("Te parece una buena oferta?",color=ft.Colors.BLACK)
     checkbox_si = checkbox("Si")
     checkbox_no = checkbox("No")
@@ -124,7 +124,7 @@ def main(page: ft.Page):
                 }
 
         try:
-            response = requests.post("http://127.0.0.1:8081/model_v1", json=datos_movil)
+            response = requests.post("http://127.0.0.1:8085/model_v1", json=datos_movil)
             response_data = response.json()
             precio_prediccion = response_data.get("precio_modelo")
             
@@ -161,7 +161,7 @@ def main(page: ft.Page):
             resultado.color = ft.colors.RED
 
         page.update()
-    boton = ft.ElevatedButton("Calcular oferta", on_click=calcular_oferta, bgcolor=ft.colors.GREY, color=ft.colors.WHITE,height=50, width=300, disabled=True)
+    boton = ft.ElevatedButton("Calcular oferta", on_click=calcular_oferta, bgcolor=ft.colors.GREY, color=ft.colors.WHITE,height=50, width=300, disabled=False)
 
     def validar_campos():
 
@@ -215,6 +215,10 @@ def main(page: ft.Page):
                     content=ft.Row([ancho_px, alto_px, pantalla_tipo], alignment=ft.MainAxisAlignment.CENTER),
                     padding=ft.Padding(top=10, bottom=10,left=0,right=0)
                 ),
+                ft.Container(
+                    content=ft.Row([numero_valoraciones, numero_estrellas], alignment=ft.MainAxisAlignment.CENTER),
+                    padding=ft.Padding(top=10, bottom=10,left=0,right=0)
+                ),
                 texto_opinion,
                 ft.Container(
                     content=ft.Row([checkbox_si, checkbox_no], alignment=ft.MainAxisAlignment.CENTER),
@@ -236,4 +240,4 @@ def main(page: ft.Page):
     page.add(fondo)
 
 #Ejecutar Main
-ft.app(target=main)
+ft.app(target=main, view=ft.WEB_BROWSER)
