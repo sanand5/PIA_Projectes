@@ -99,6 +99,12 @@ def main(page: ft.Page):
             ancho_px_float = float(ancho_px.value)
             alto_px_float = float(alto_px.value)
             fecha_int = int(fecha.value)
+            opinion = None
+            if checkbox_si.value:
+                opinion = True
+            if checkbox_no.value:
+                opinion = False
+                
         except ValueError:
             resultado.value = "Por favor, ingrese números válidos para los campos numéricos."
             resultado.color = ft.colors.RED
@@ -121,6 +127,7 @@ def main(page: ft.Page):
                     "promedio_valoraciones": promedio_valoraciones, 
                     "precio_anterior": precio_anterior_val,
                     "precio_actual": 0, 
+                    "opinion_cliente": opinion, 
                 }
 
         try:

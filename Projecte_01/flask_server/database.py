@@ -20,7 +20,7 @@ def guardar_mongodb(peticion, preu_model, opinion_cliente):
     try:
         mongo_db = MongoDB()  
         peticion['precio_modelo'] = preu_model
-        if opinion_cliente:
+        if opinion_cliente is not None:
             peticion['opinion_client'] = opinion_cliente
         mongo_db.guardar(peticion)
     except Exception as e:
