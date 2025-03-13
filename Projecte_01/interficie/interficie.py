@@ -159,12 +159,12 @@ def main(page: ft.Page):
             page.update()   
 
         except Exception as ex:
-            resultado.value = f"Error en la predicción: {ex}"
+            resultado.value = f"Error en la predicción"
             print(f"Error en la predicción: {ex}")
             resultado.color = ft.colors.RED
 
         page.update()
-    # boton = ft.ElevatedButton("Calcular oferta", on_click=calcular_oferta, color=ft.colors.WHITE,height=50, width=300, disabled_color=ft.colors.GREY, disabled=True)
+    
     boton = ft.ElevatedButton(
         "Calcular oferta",
         on_click=calcular_oferta,
