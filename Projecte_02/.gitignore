@@ -1,0 +1,19 @@
+# Extensiones
+*.xml
+*.vscode
+
+# Mis entornos de python
+venv_*/
+*_venv/
+
+# Configuraciones
+desktop.ini
+.directory
+
+# Archivos especificos
+
+
+# Directorios especificos
+
+## Base de datos
+mongo_data/

@@ -1,0 +1,11 @@
+version: '3.8'
+
+services:
+  mongo:
+    image: mongo:latest
+    container_name: mongodb_pia_02
+    restart: always
+    ports:
+      - "27022:27017"
+    volumes:
+      - ./mongo_data:/data/db
