@@ -9,7 +9,7 @@ import cv2
 import numpy as np
 from pathlib import Path
 
-def cargar_modelo():
+def cargar_modelo_yolo():
     try:
         # Configuración
         model_path = "./models/model_27_03_2025_19_30.pt"
@@ -18,8 +18,17 @@ def cargar_modelo():
     except FileNotFoundError as e:
         raise Exception(f"Error al cargar el modelo: {e}")
 
-def predecir_recuadro(photo, model):
-    img = cv2.imread(photo)    
-    results = model.predict(img)
+def predecir_yolo(photo, model):
+    results = model.predict(
+        source=photo,
+        conf=0.25,
+        save=False,
+        verbose=False
+    )
+    return results[0]
 
-    return results
+def obtener_bbox(result):
+    recuadros = []
+    for box in result.boxes:
+        recuadros.append(box.xyxy)
+    return recuadros

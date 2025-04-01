@@ -1,12 +1,12 @@
 from flask import Flask, jsonify, request
 import datetime
-from model import cargar_modelo, predecir_precio
+from model import cargar_modelo_yolo, predecir_yolo, obtener_bbox
 from database import guardar_mongodb
 from config import Config
 
 app = Flask(__name__)
 
-scaler, encoder, model, X_data_columns, modas = cargar_modelo()
+scaler, encoder, model, X_data_columns, modas = cargar_modelo_yolo()
 
 @app.route("/model_v2", methods=["POST"])
 def enviar():
@@ -22,7 +22,10 @@ def enviar():
         }
 
         img = convertir_img(peticion['photo'])
-        # recuadro = predecir_yolo(peticion["photo"])
+        result = predecir_yolo(peticion["photo"])
+        recuadros = obtener_bbox(results)
+
+
         # matricula = ocr_get_mattr(recuadro)
         # timestamp = int(datetime.datetime.now().timestamp() * 1000)
 

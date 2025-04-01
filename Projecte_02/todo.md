@@ -1,7 +1,5 @@
 # TODO
 ## Andreu
-- [ ] 
-- [ ] 
 - [ ] Subir yolo a flask
 
 ## Gerard
