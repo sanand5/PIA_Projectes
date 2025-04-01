@@ -1,0 +1,5 @@
+server=127.25.0.5
+port=27017
+username=user
+password=pass
+database=PIA
