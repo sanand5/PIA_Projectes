@@ -9,6 +9,7 @@
 ## Tareas
 - Mirar que version de yolo es mejor (Actualment estem gastant Yolo11)
 - Se crea una api en flask para yolo @Andreu
+- Subir las fotos a mongoDB i recibir las fotos al servidor
 - Se crea una api en flask para el ocr
 - Se entrena un modelo de OCR
 - Se crea la interfaz del cliente 

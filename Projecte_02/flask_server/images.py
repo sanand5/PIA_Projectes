@@ -1,1 +1,0 @@
-def recortar_matriculas()
