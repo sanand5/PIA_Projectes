@@ -27,15 +27,9 @@ def predecir_yolo(photo, model):
     )
     return results[0]
 
-def predecir_ocr(image_path, ocr_engine):
-    img = cv2.imread(image_path)
-    if img is None:
-        print(f"❌ Error: No se pudo leer la imagen en {image_path}")
-        return None
-    
-    gray = cv2.cvtColor(img, cv2.COLOR_BGR2GRAY)
+def predecir_ocr(image, ocr_engine):
+    gray = cv2.cvtColor(image, cv2.COLOR_BGR2GRAY)
     _, binary = cv2.threshold(gray, 128, 255, cv2.THRESH_BINARY)
-    
     try:
         result = ocr_engine.ocr(binary, cls=True)
         if result and result[0]:

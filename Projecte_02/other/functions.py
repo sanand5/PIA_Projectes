@@ -51,8 +51,6 @@ def test_api(image_path, api_url="http://127.0.0.1:8085/model_v2"):
         # Preparar los datos de la petición
         payload = {
             "photo": image_base64,
-            "matricula": "",  # Este campo parece opcional según tu API
-            "status": "test"  # Valor de ejemplo para status
         }
         
         # Encabezados de la petición
