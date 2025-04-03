@@ -1,73 +1,142 @@
+import unittest
 import requests
 import base64
-import json
-from datetime import datetime
-import time
 import os
+import time
 from config import Config
+from io import BytesIO
+from PIL import Image
 
-# Configuración
-API_URL = "http://127.0.0.1:8085/model_v2"
-IMAGE_PATH = os.path.join(Config.BASE_PATH, "matricula_test.jpg")
-
-STATUS = 2  # 0: DENTRO, 1: SALIENDO, 2: FUERA
-
-def encode_image_to_base64(image_path):
-    """Codifica una imagen a base64"""
-    with open(image_path, "rb") as image_file:
-        return base64.b64encode(image_file.read()).decode('utf-8')
-
-def make_request(image_base64=None, status=0):
-    """Hace una petición a la API"""
-    payload = {
-        "photo": image_base64,
-        "status": status
-    }
+class TestParkingAPI(unittest.TestCase):
+    BASE_URL = "http://127.0.0.1:8085"
+    TEST_IMAGE_PATH = os.path.join(Config.BASE_PATH, "matricula_test.jpg")
     
-    try:
-        start_time = time.time()
-        response = requests.post(API_URL, json=payload)
-        elapsed_time = time.time() - start_time
+    @classmethod
+    def setUpClass(cls):
+        """Prepara los datos de prueba"""
+        # Crear imagen de prueba si no existe
+        if not os.path.exists(cls.TEST_IMAGE_PATH):
+            img = Image.new('RGB', (640, 480), color='red')
+            img.save(cls.TEST_IMAGE_PATH)
         
-        if response.status_code == 200:
-            print("\n✅ Petición exitosa:")
-            print(f"Matrícula detectada: {response.json()['matricula']}")
-            print(f"Timestamp: {response.json()['timestamp']}")
-            print(f"Tiempo de respuesta: {elapsed_time:.2f} segundos")
-        else:
-            print("\n❌ Error en la petición:")
-            print(f"Código de estado: {response.status_code}")
-            print(f"Error: {response.json().get('error', 'Sin mensaje de error')}")
-            
-        return response.json()
+        # Codificar imagen de prueba
+        with open(cls.TEST_IMAGE_PATH, "rb") as f:
+            cls.test_image_base64 = base64.b64encode(f.read()).decode('utf-8')
+        
+        # Matrícula de prueba (simulamos una reconocida)
+        cls.test_plate = "TEST123"
     
-    except requests.exceptions.RequestException as e:
-        print(f"\n🔥 Error de conexión: {str(e)}")
-        return None
+    def test_01_model_v2_success(self):
+        """Prueba el endpoint /model_v2 con datos válidos"""
+        print("\n🔍 Probando /model_v2 (POST) - Caso exitoso")
+        response = requests.post(
+            f"{self.BASE_URL}/model_v2",
+            json={"photo": self.test_image_base64, "status": 2}
+        )
+        
+        self.assertEqual(response.status_code, 200)
+        data = response.json()
+        self.assertIn("matricula", data)
+        self.assertIn("timestamp", data)
+        print(f"✅ Matrícula reconocida: {data['matricula']}")
+        
+        # Guardamos la matrícula para pruebas posteriores
+        self.__class__.test_plate = data['matricula']
+    
+    def test_02_get_matricula_info(self):
+        """Prueba el endpoint /matricula con datos válidos"""
+        print("\n🔍 Probando /matricula (GET) - Caso exitoso")
+        response = requests.get(
+            f"{self.BASE_URL}/matricula",
+            params={"matricula": self.test_plate}
+        )
+        
+        self.assertEqual(response.status_code, 200)
+        data = response.json()
+        self.assertIn("_id", data)
+        print(f"✅ Datos obtenidos para matrícula: {data['_id']}")
+        print(data)
+    
+    def test_03_invalid_status(self):
+        """Prueba estado inválido en /model_v2"""
+        print("\n🔍 Probando /model_v2 (POST) - Estado inválido")
+        response = requests.post(
+            f"{self.BASE_URL}/model_v2",
+            json={"photo": self.test_image_base64, "status": 99}
+        )
+        
+        self.assertEqual(response.status_code, 400)
+        error = response.json()
+        self.assertIn("error", error)
+        print(f"✅ Error manejado correctamente: {error['error']}")
+    
+    def test_04_missing_photo(self):
+        """Prueba falta de foto en /model_v2"""
+        print("\n🔍 Probando /model_v2 (POST) - Falta foto")
+        response = requests.post(
+            f"{self.BASE_URL}/model_v2",
+            json={"status": 0}
+        )
+        
+        self.assertEqual(response.status_code, 400)
+        error = response.json()
+        self.assertIn("error", error)
+        print(f"✅ Error manejado correctamente: {error['error']}")
+    
+    def test_05_missing_plate_param(self):
+        """Prueba falta de parámetro matrícula en /matricula"""
+        print("\n🔍 Probando /matricula (GET) - Falta parámetro")
+        response = requests.get(f"{self.BASE_URL}/matricula")
+        
+        self.assertEqual(response.status_code, 400)
+        error = response.json()
+        self.assertIn("error", error)
+        print(f"✅ Error manejado correctamente: {error['error']}")
+    
+    def test_06_unknown_plate(self):
+        """Prueba matrícula no existente en /matricula"""
+        print("\n🔍 Probando /matricula (GET) - Matrícula desconocida")
+        response = requests.get(
+            f"{self.BASE_URL}/matricula",
+            params={"matricula": "PLATE999"}
+        )
+        
+        self.assertEqual(response.status_code, 404)
+        error = response.json()
+        self.assertIn("error", error)
+        print(f"✅ Error manejado correctamente: {error['error']}")
+    
+    def test_07_performance(self):
+        """Prueba de rendimiento con múltiples peticiones"""
+        print("\n⏱️ Probando rendimiento con 5 peticiones rápidas")
+        start_time = time.time()
+        
+        for i in range(5):
+            status = i % 3  # Rotar entre 0, 1, 2
+            response = requests.post(
+                f"{self.BASE_URL}/model_v2",
+                json={"photo": self.test_image_base64, "status": status}
+            )
+            self.assertIn(response.status_code, [200, 400])
+        
+        elapsed = time.time() - start_time
+        print(f"✅ 5 peticiones completadas en {elapsed:.2f} segundos")
 
 if __name__ == "__main__":
-    print("=== Prueba de la API de reconocimiento de matrículas ===")
+    # Configurar y ejecutar pruebas
+    print("\n" + "="*60)
+    print("  INICIANDO PRUEBAS DE LA API DE MATRÍCULAS")
+    print("="*60 + "\n")
     
-    # Ejemplo 1: Petición con imagen real
-    try:
-        image_base64 = encode_image_to_base64(IMAGE_PATH)
-        print(f"\n📤 Enviando imagen: {IMAGE_PATH} con estado: {STATUS}")
-        result = make_request(image_base64, STATUS)
-    except FileNotFoundError:
-        print(f"\n⚠️ No se encontró la imagen {IMAGE_PATH}, usando ejemplo con imagen dummy")
-        
-        # Ejemplo 2: Petición con imagen dummy (si no hay imagen real)
-        dummy_image = {
-            "photo": "iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVR42mP8z/C/HgAGgwJ/lK3Q6wAAAABJRU5ErkJggg==",
-            "status": STATUS
-        }
-        print("\n📤 Enviando imagen dummy (rectángulo rojo 1x1)")
-        result = make_request(**dummy_image)
+    runner = unittest.TextTestRunner(verbosity=2)
+    suite = unittest.TestLoader().loadTestsFromTestCase(TestParkingAPI)
+    result = runner.run(suite)
     
-    # Ejemplo 3: Petición con estado inválido (para probar errores)
-    print("\n🧪 Probando con estado inválido (99)")
-    make_request(image_base64, 99)
+    # Mostrar resumen
+    print("\n" + "="*60)
+    print(f"  RESUMEN: {result.testsRun} pruebas ejecutadas")
+    print(f"  Fallos: {len(result.failures)}, Errores: {len(result.errors)}")
+    print("="*60)
     
-    # Ejemplo 4: Petición sin imagen (para probar validación)
-    print("\n🧪 Probando petición sin imagen")
-    make_request(status=0)
+    if not result.wasSuccessful():
+        exit(1)
