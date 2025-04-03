@@ -26,11 +26,11 @@ def main(page: ft.Page):
             boton_pagar.current.disabled = True
             boton_pagar.current.bgcolor = "#616161" 
         page.update()
-        
+
     def comprobar_matricula(e):
         try:
             
-            response = requests.get(f"http://localhost:8000/api/vehiculos/{matricula.current.value}")
+            response = requests.get(f"http://localhost:8085/model_v2/{matricula.current.value}")
             print(response)
             if response == 1:
                 estado.current.value = "DENTRO"
@@ -54,17 +54,32 @@ def main(page: ft.Page):
         page.update()
 
     def pagar_salir(e):
-        ahora = datetime.now()
-        limite = ahora + timedelta(minutes=15)
-        hora_limite.current.value = limite.strftime("%H:%M:%S")
-        hora_limite.current.color = "#1976D2"  
-        estado.current.value = "PAGADO - PUEDE SALIR"
-        estado.current.color = "#388E3C"  
-        boton_pagar.current.disabled = True
-        boton_pagar.current.bgcolor = "#616161"  
-        boton_comprobar.current.disabled = True
-        boton_comprobar.current.bgcolor = "#616161"  
-        page.update()
+        matricula_text = matricula.current.value
+        response = requests.get(f"http://localhost:8085/model_v2/", json= {"matricula": matricula_text,"status": 1})
+        print(response)
+        if response.status_code == 200:
+            print("Pago realizado correctamente")
+            ahora = datetime.now()
+            limite = ahora + timedelta(minutes=15)
+            hora_limite.current.value = limite.strftime("%H:%M:%S")
+            hora_limite.current.color = "#1976D2"  
+            estado.current.value = "PAGADO - PUEDE SALIR"
+            estado.current.color = "#388E3C"  
+            boton_pagar.current.disabled = True
+            boton_pagar.current.bgcolor = "#616161"  
+            boton_comprobar.current.disabled = True
+            boton_comprobar.current.bgcolor = "#616161"  
+            page.update()
+
+        else:
+            print("Error al realizar el pago")
+            estado.current.value = "ERROR AL COMPROBAR EL PAGO"
+            estado.current.color = "#D32F2F" 
+            
+            boton_pagar.current.bgcolor = "#616161"  
+            boton_comprobar.current.bgcolor = "#616161"  
+            page.update()
+
     
     page.add(
         ft.Container(
