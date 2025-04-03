@@ -4,36 +4,32 @@ import requests
 
 def main(page: ft.Page):
 
-    # Configuración de la página con colores
     page.title = "Parking Controller"
     page.vertical_alignment = ft.MainAxisAlignment.CENTER
     page.horizontal_alignment = ft.CrossAxisAlignment.CENTER
     page.padding = 30
     page.bgcolor = "#E0E0E0" 
     
-    # Variables de estado
     matricula = ft.Ref[ft.TextField]()
     estado = ft.Ref[ft.Text]()
     hora_limite = ft.Ref[ft.Text]()
     boton_pagar = ft.Ref[ft.ElevatedButton]()
     boton_comprobar = ft.Ref[ft.ElevatedButton]()
     
-    # Función para validar matrícula
     def validar_matricula(e):
         if matricula.current.value.strip():
             boton_comprobar.current.disabled = False
             boton_comprobar.current.bgcolor = "#6d0899" 
         else:
             boton_comprobar.current.disabled = True
-            boton_comprobar.current.bgcolor = "#616161"  # Gris oscuro desactivado
+            boton_comprobar.current.bgcolor = "#616161"  
             boton_pagar.current.disabled = True
-            boton_pagar.current.bgcolor = "#616161"  # Gris oscuro desactivado
+            boton_pagar.current.bgcolor = "#616161" 
         page.update()
-    
-    # Función para comprobar matrícula
+        
     def comprobar_matricula(e):
         try:
-            # Llamada a la API
+            
             response = requests.get(f"http://localhost:8000/api/vehiculos/{matricula.current.value}")
             print(response)
             if response == 1:
@@ -57,25 +53,23 @@ def main(page: ft.Page):
             estado.current.color = "#D32F2F"        
         page.update()
 
-    # Función para pagar
     def pagar_salir(e):
         ahora = datetime.now()
         limite = ahora + timedelta(minutes=15)
         hora_limite.current.value = limite.strftime("%H:%M:%S")
-        hora_limite.current.color = "#1976D2"  # Azul
+        hora_limite.current.color = "#1976D2"  
         estado.current.value = "PAGADO - PUEDE SALIR"
-        estado.current.color = "#388E3C"  # Verde
+        estado.current.color = "#388E3C"  
         boton_pagar.current.disabled = True
-        boton_pagar.current.bgcolor = "#616161"  # Gris oscuro desactivado
+        boton_pagar.current.bgcolor = "#616161"  
         boton_comprobar.current.disabled = True
-        boton_comprobar.current.bgcolor = "#616161"  # Gris oscuro desactivado
+        boton_comprobar.current.bgcolor = "#616161"  
         page.update()
     
     page.add(
         ft.Container(
             ft.Column(
                 [
-                    # Título
                     ft.Container(
                         ft.Text("PARKING CONTROLLER", 
                             size=32, 
@@ -97,12 +91,12 @@ def main(page: ft.Page):
                             text_size=16,
                             on_change=validar_matricula,
                             autofocus=True,
-                            capitalization=ft.TextCapitalization.CHARACTERS
+                            text_style=ft.TextStyle(color=ft.colors.BLACK),
+                            capitalization=ft.TextCapitalization.CHARACTERS,
                         ),
                         padding=ft.padding.only(bottom=20)
                     ),
                     
-
                     ft.Container(
                         ft.ElevatedButton(
                             ref=boton_comprobar,
@@ -120,7 +114,7 @@ def main(page: ft.Page):
                         ),
                         padding=ft.padding.only(bottom=10)
                     ),
-                      
+                    
                     ft.Container(
                         ft.ElevatedButton(
                             ref=boton_pagar,
@@ -129,7 +123,7 @@ def main(page: ft.Page):
                             on_click=pagar_salir,
                             width=350,
                             height=50,
-                            bgcolor="#908d91",  # Gris oscuro (desactivado)
+                            bgcolor="#908d91",
                             color="white",
                             style=ft.ButtonStyle(
                                 shape=ft.RoundedRectangleBorder(radius=10),
@@ -139,7 +133,6 @@ def main(page: ft.Page):
                         padding=ft.padding.only(bottom=30)
                     ),
                     
-                    # Estado
                     ft.Container(
                         ft.Row(
                             [
@@ -160,7 +153,6 @@ def main(page: ft.Page):
                         width=350
                     ),
                     
-                    # Hora límite
                     ft.Container(
                         ft.Row(
                             [

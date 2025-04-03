@@ -2,6 +2,34 @@ import requests
 import base64
 import json
 import os
+from pymongo import MongoClient
+from pymongo.errors import ConnectionFailure
+
+def existe_matricula(uri: str, nombre_db: str, nombre_coleccion: str, texto_matricula: str) -> bool:
+    try:
+        client = MongoClient(uri)
+        client.admin.command('ping')
+        
+        # Obtener la colección
+        db = client[nombre_db]
+        coleccion = db[nombre_coleccion]
+        
+        # Buscar el texto en el campo matricula
+        resultado = coleccion.find_one({"matricula": texto_matricula})
+        return resultado is not None
+        
+    except ConnectionFailure:
+        print("Error: No se pudo conectar a MongoDB")
+        return False
+    except Exception as e:
+        print(f"Error inesperado: {e}")
+        return False
+    
+    finally:
+        if 'client' in locals():
+            client.close()
+
+
 
 def image_to_base64(image_path):
     """Convierte una imagen a base64"""
